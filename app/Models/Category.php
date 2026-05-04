@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Category extends Model
+{
+    protected $fillable = [
+        'name',
+        'family_id'
+    ];
+    //
+    public function family() {
+        return $this->belongsTo(Family::class);
+    }
+
+    public function subcategories() {
+        return $this->hasMany(Subcategory::class);
+    }
+}
