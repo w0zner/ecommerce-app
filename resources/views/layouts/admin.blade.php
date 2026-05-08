@@ -19,7 +19,7 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased" x-data="{sidebarOpen: false}">
     {{--         <x-banner />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -41,6 +41,19 @@
         </div>
 
         @stack('modals') --}}
+
+        {{-- <div class="fixed inset-0 bg-gray-900 bg-opacity-50 z-20">
+
+        </div> --}}
+
+        <div class="fixed top-16 left-64 right-0 bottom-0 bg-gray-900 bg-opacity-50 z-20 sm:hidden" x-show="sidebarOpen"
+        style="display: none;"
+        x-on:click="sidebarOpen=false"
+        :class="{
+            'left-64': sidebarOpen,
+            'left-0': !sidebarOpen
+        }">
+        </div>
 
 
         @include('layouts.partials.admin.navigation')
