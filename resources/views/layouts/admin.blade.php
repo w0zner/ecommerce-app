@@ -19,34 +19,14 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased" x-data="{sidebarOpen: false}">
-    {{--         <x-banner />
+<body class="font-sans antialiased"
+    x-data="{sidebarOpen: false}"
+    :class="{
+        'overflow-hidden': sidebarOpen
+    }">
 
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @livewire('navigation-menu')
-
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-
-        @stack('modals') --}}
-
-        {{-- <div class="fixed inset-0 bg-gray-900 bg-opacity-50 z-20">
-
-        </div> --}}
-
-        <div class="fixed top-16 left-64 right-0 bottom-0 bg-gray-900 bg-opacity-50 z-20 sm:hidden" x-show="sidebarOpen"
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 z-30 mt-16 sm:hidden"
+        x-show="sidebarOpen"
         style="display: none;"
         x-on:click="sidebarOpen=false"
         :class="{
@@ -61,7 +41,7 @@
         @include('layouts.partials.admin.sidebar')
 
 
-    <div class="p-4 sm:ml-64 mt-14">
+    <div class="p-4 sm:ml-64 mt-16">
         <div class="p-4 border-2 border-default border-dashed rounded-base">
             {{ $slot }}
         </div>

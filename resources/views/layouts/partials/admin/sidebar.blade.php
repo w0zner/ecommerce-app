@@ -1,20 +1,60 @@
-    <aside id="top-bar-sidebar"
+@php
+    $links = [
+        [
+            'name' => 'Dashboard',
+            'icon' => 'home',
+            'route' => route('admin.dashboard'),
+            'active' => request()->routeIs('admin.dashboard'),
+        ],
+        [
+            'name' => 'Products',
+            'icon' => 'box',
+            'route' => route('admin.products.index'),
+        ],
+        [
+            'name' => 'Categories',
+            'icon' => 'tag',
+            'route' => route('admin.categories.index'),
+        ],
+        [
+            'name' => 'Orders',
+            'icon' => 'shopping-cart',
+            'route' => route('admin.orders.index'),
+        ],
+        [
+            'name' => 'Users',
+            'icon' => 'users',
+            'route' => route('admin.users.index'),
+        ],
+    ];
+@endphp
+
+<aside id="top-bar-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-full transition-transform -translate-x-full sm:translate-x-0"
         :class="{
             'translate-x-0 ease-out': sidebarOpen,
             '-translate-x-full ease-in': !sidebarOpen
         }"
         aria-label="Sidebar">
-        <div class="h-full px-3 py-4 overflow-y-auto bg-neutral-primary-soft border-e border-default">
+        <div class="h-full px-3 py-4 overflow-y-auto bg-white border-e border-default">
            {{--  <a href="https://flowbite.com/" class="flex items-center ps-2.5 mb-5">
                 <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 me-3" alt="Flowbite Logo" />
                 <span class="self-center text-lg text-heading font-semibold whitespace-nowrap">Flowbite</span>
             </a> --}}
             <div class="pb-5"></div>
             <ul class="pt-10 space-y-2 font-medium">
-                <li>
+                @foreach ($links as $link)
+                    <li>
+                        <a href="{{ $link['route'] }}"
+                            class="flex items-center px-2 py-1.5 text-body rounded-lg hover:bg-blue-100 hover:text-blue-900 group {{ $link['active'] ? 'bg-blue-100 text-blue-900' : '' }}">
+                            <x-icons :name="$link['icon']" class="w-5 h-5 transition duration-75 group-hover:text-fg-brand" aria-hidden="true" />
+                            <span class="ms-3">{{ $link['name'] }}</span>
+                        </a>
+                    </li>
+                @endforeach
+                {{--<li>
                     <a href="#"
-                        class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
+                        class="flex items-center px-2 py-1.5 text-body rounded-lg hover:bg-blue-100 hover:text-blue-900 group">
                         <svg class="w-5 h-5 transition duration-75 group-hover:text-fg-brand" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
@@ -26,7 +66,7 @@
                         <span class="ms-3">Dashboard</span>
                     </a>
                 </li>
-                <li>
+                 <li>
                     <a href="#"
                         class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
                         <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-fg-brand"
@@ -94,6 +134,6 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
                     </a>
                 </li>
-            </ul>
+ --}}            </ul>
         </div>
     </aside>
