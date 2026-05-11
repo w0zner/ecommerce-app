@@ -2,35 +2,39 @@
     $links = [
         [
             'name' => 'Dashboard',
-            'icon' => 'home',
+            'icon' => 'fa-solid fa-gauge-high',
             'route' => route('admin.dashboard'),
             'active' => request()->routeIs('admin.dashboard'),
         ],
         [
             'name' => 'Products',
-            'icon' => 'box',
-            'route' => route('admin.products.index'),
+            'icon' => 'fa-solid fa-gauge-high',
+            'route' => route('admin.dashboard'),
+            'active' => null,
         ],
         [
             'name' => 'Categories',
-            'icon' => 'tag',
-            'route' => route('admin.categories.index'),
+            'icon' => 'fa-solid fa-gauge-high',
+            'route' => route('admin.dashboard'),
+            'active' => null,
         ],
         [
             'name' => 'Orders',
             'icon' => 'shopping-cart',
-            'route' => route('admin.orders.index'),
+            'route' => route('admin.dashboard'),
+            'active' => null,
         ],
         [
             'name' => 'Users',
-            'icon' => 'users',
-            'route' => route('admin.users.index'),
+            'icon' => 'fa-solid fa-gauge-high',
+            'route' => route('admin.dashboard'),
+            'active' => null,
         ],
     ];
 @endphp
 
 <aside id="top-bar-sidebar"
-        class="fixed top-0 left-0 z-40 w-64 h-full transition-transform -translate-x-full sm:translate-x-0"
+        class="fixed top-0 left-0 z-40 w-64 h-[100dvh] transition-transform -translate-x-full sm:translate-x-0"
         :class="{
             'translate-x-0 ease-out': sidebarOpen,
             '-translate-x-full ease-in': !sidebarOpen
@@ -47,7 +51,7 @@
                     <li>
                         <a href="{{ $link['route'] }}"
                             class="flex items-center px-2 py-1.5 text-body rounded-lg hover:bg-blue-100 hover:text-blue-900 group {{ $link['active'] ? 'bg-blue-100 text-blue-900' : '' }}">
-                            <x-icons :name="$link['icon']" class="w-5 h-5 transition duration-75 group-hover:text-fg-brand" aria-hidden="true" />
+                            <i class="{{ $link['icon'] }} text-gray-700"></i>
                             <span class="ms-3">{{ $link['name'] }}</span>
                         </a>
                     </li>
