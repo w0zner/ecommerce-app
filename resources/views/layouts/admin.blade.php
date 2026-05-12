@@ -1,3 +1,5 @@
+@props({'breadcrumbs' => []})
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -43,9 +45,12 @@
         @include('layouts.partials.admin.sidebar')
 
 
-    <div class="p-4 sm:ml-64 mt-16">
-        <div class="p-4 border-2 border-default border-dashed rounded-base">
-            {{ $slot }}
+    <div class="p-4 sm:ml-64">
+        <div class="mt-16">
+            @include('layouts.partials.admin.breadcrumb')
+            <div class="p-4 border-2 border-default border-dashed rounded-base">
+                {{ $slot }}
+            </div>
         </div>
     </div>
 
