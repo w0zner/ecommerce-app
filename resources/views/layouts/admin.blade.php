@@ -1,4 +1,4 @@
-@props({'breadcrumbs' => []})
+@props(['breadcrumbs' => []])
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
