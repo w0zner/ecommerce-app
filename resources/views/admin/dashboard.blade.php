@@ -1,9 +1,8 @@
 <x-admin-layout :breadcrumbs="[
-[
-    'name' => 'Dashboard',
-    'route' => route('admin.dashboard')
-],
-
+    [
+            'name' => 'Dashboard',
+            'route' => route('admin.dashboard'),
+    ],
 ]">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-white rounded-lg shadow-lg p-6">

@@ -7,28 +7,10 @@
             'active' => request()->routeIs('admin.dashboard'),
         ],
         [
-            'name' => 'Products',
-            'icon' => 'fa-solid fa-gauge-high',
-            'route' => route('admin.dashboard'),
-            'active' => null,
-        ],
-        [
-            'name' => 'Categories',
-            'icon' => 'fa-solid fa-gauge-high',
-            'route' => route('admin.dashboard'),
-            'active' => null,
-        ],
-        [
-            'name' => 'Orders',
-            'icon' => 'shopping-cart',
-            'route' => route('admin.dashboard'),
-            'active' => null,
-        ],
-        [
-            'name' => 'Users',
-            'icon' => 'fa-solid fa-gauge-high',
-            'route' => route('admin.dashboard'),
-            'active' => null,
+            'name' => 'Familias',
+            'icon' => 'fa-solid fa-box-open',
+            'route' => route('admin.families.index'),
+            'active' => request()->routeIs('admin.families.index'),
         ],
     ];
 @endphp

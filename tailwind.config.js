@@ -19,5 +19,8 @@ export default {
         },
     },
 
-    plugins: [forms, typography],
+    plugins: [forms, typography, require('daisyui')],
+    daisyui: {
+        themes: ["cupcake", "light"], // El primero de la lista será el por defecto
+    },
 };
