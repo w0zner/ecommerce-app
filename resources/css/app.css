@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .btn-accion-editar {
+        @apply btn btn-sm btn-ghost rounded-md;
+    }
+    .btn-accion-eliminar {
+        @apply btn btn-sm text-error btn-square rounded-md btn-ghost;
+    }
+    .card-form {
+        @apply card bg-base-100 shadow-md lg:card-side w-full max-w-4xl
+    }
+}
+
 [x-cloak] {
     display: none;
 }

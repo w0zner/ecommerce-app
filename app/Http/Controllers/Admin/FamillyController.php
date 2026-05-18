@@ -13,7 +13,8 @@ class FamillyController extends Controller
      */
     public function index()
     {
-        $families = Family::paginate(7);
+        $families = Family::orderBy('id', 'desc')->paginate(7);
+
         return view('admin.families.index', compact('families'));
     }
 
@@ -30,7 +31,13 @@ class FamillyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        Family::create($request->all());
+
+        return redirect()->route('admin.families.index', );
     }
 
     /**
@@ -62,6 +69,8 @@ class FamillyController extends Controller
      */
     public function destroy(Family $family)
     {
-        //
+        $family->delete();
+
+        return redirect()->route('admin.families.index');
     }
 }

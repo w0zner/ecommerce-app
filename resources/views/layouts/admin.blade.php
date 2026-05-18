@@ -47,7 +47,17 @@
 
     <div class="p-4 sm:ml-64">
         <div class="mt-16">
-            @include('layouts.partials.admin.breadcrumb')
+            {{-- hacemos que el breadcrumb se ponga a un lado y el boton al otro lado --}}
+            <div class="flex justify-between items-center"> 
+                @include('layouts.partials.admin.breadcrumb')
+
+                @isset($action)
+                    <div>
+                        {{ $action }}
+                    </div>
+                @endisset
+            </div>
+
             <div class="p-4 border-2 border-default border-dashed rounded-base">
                 {{ $slot }}
             </div>

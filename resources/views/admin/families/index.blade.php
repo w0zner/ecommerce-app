@@ -8,8 +8,14 @@
     ],
 ]">
 
+<x-slot name="action">
+    <a href="{{ route('admin.families.create') }}" role="button" class="btn btn-neutral">
+        <i class="fa-solid fa-plus"></i> Agregar
+    </a>
+</x-slot>
 
-@if($families)
+
+@if($families->isNotEmpty())
     <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-md border border-default">
         <table class="w-full text-sm text-left rtl:text-right text-body">
             <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium">
@@ -34,13 +40,18 @@
                         <td class="px-6 py-4">
                             {{ $family->name }}
                         </td>
-                        <td class="px-6 py-4 text-center">
-                            <a href="{{ route('admin.families.edit', $family) }}" role="button" class="btn btn-sm btn-ghost rounded-sm">
-                                <i class="fas fa-edit"></i>
+                        <td class="flex justify-center px-6 py-4 text-center">
+                            <a href="{{ route('admin.families.edit', $family) }}" role="button" class="btn-accion-editar">
+                                <i class="fas fa-edit"></i> 
                             </a>
-                            <a href="{{ route('admin.families.destroy', $family) }}" role="button" class="btn btn-sm text-white btn-square rounded-sm btn-soft btn-error">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                            <form action="{{ route('admin.families.destroy', $family) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn-accion-eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
