@@ -48,7 +48,7 @@
     <div class="p-4 sm:ml-64">
         <div class="mt-16">
             {{-- hacemos que el breadcrumb se ponga a un lado y el boton al otro lado --}}
-            <div class="flex justify-between items-center"> 
+            <div class="flex justify-between items-center">
                 @include('layouts.partials.admin.breadcrumb')
 
                 @isset($action)
@@ -65,6 +65,8 @@
     </div>
 
     @livewireScripts
+
+    @stack('js')
 </body>
 
 </html>

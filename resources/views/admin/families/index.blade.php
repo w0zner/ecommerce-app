@@ -42,9 +42,9 @@
                         </td>
                         <td class="flex justify-center px-6 py-4 text-center">
                             <a href="{{ route('admin.families.edit', $family) }}" role="button" class="btn-accion-editar">
-                                <i class="fas fa-edit"></i> 
+                                <i class="fas fa-edit"></i>
                             </a>
-                            <form action="{{ route('admin.families.destroy', $family) }}" method="post">
+                            <form action="{{ route('admin.families.destroy', $family) }}" method="post" onsubmit="confirmDelete(event)">
                                 @csrf
                                 @method('DELETE')
 
@@ -67,5 +67,16 @@
         <p><span class="font-medium me-1">Información!</span> No hay familias registradas.</p>
     </div>
 @endif
+
+@push('js')
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+            if (confirm('¿Estás seguro de que deseas eliminar esta familia?')) {
+                event.target.submit();
+            }
+        }
+    </script>
+@endpush
 
 </x-admin-layout>
