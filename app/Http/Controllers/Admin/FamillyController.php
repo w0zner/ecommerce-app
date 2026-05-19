@@ -37,6 +37,12 @@ class FamillyController extends Controller
 
         Family::create($request->all());
 
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title'=> 'Info!',
+            'text'=> 'Registro guardado con éxito!'
+        ]);
+
         return redirect()->route('admin.families.index', );
     }
 
@@ -67,6 +73,12 @@ class FamillyController extends Controller
 
         $family->update($request->all());
 
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title'=> 'Info!',
+            'text'=> 'Registro actualizado con éxito!'
+        ]);
+
         return redirect()->route('admin.families.index');
     }
 
@@ -76,6 +88,14 @@ class FamillyController extends Controller
     public function destroy(Family $family)
     {
         $family->delete();
+
+        session()->flash('swal', [
+            'position'=> 'top-end',
+            'icon' => 'success',
+            'title'=> 'Eliminado con éxito!',
+            'showConfirmButton'=> false,
+            'timer' => 1500
+        ]);
 
         return redirect()->route('admin.families.index');
     }
