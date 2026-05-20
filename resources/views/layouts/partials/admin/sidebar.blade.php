@@ -12,6 +12,12 @@
             'route' => route('admin.families.index'),
             'active' => request()->routeIs('admin.families.index'),
         ],
+        [
+            'name' => 'Categorias',
+            'icon' => 'fa-solid fa-layer-group',
+            'route' => route('admin.categories.index'),
+            'active' => request()->routeIs('admin.categories.index'),
+        ],
     ];
 @endphp
 
