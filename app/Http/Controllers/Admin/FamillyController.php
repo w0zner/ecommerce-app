@@ -43,7 +43,7 @@ class FamillyController extends Controller
             'text'=> 'Registro guardado con éxito!'
         ]);
 
-        return redirect()->route('admin.families.index', );
+        return redirect()->route('admin.families.index');
     }
 
     /**
