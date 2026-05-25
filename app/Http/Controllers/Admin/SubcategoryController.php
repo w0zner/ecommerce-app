@@ -33,7 +33,6 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
     }
 
     /**
@@ -49,7 +48,7 @@ class SubcategoryController extends Controller
      */
     public function edit(Subcategory $subcategory)
     {
-        //
+        return view('admin.subcategories.edit', compact('subcategory'));
     }
 
     /**
@@ -65,6 +64,26 @@ class SubcategoryController extends Controller
      */
     public function destroy(Subcategory $subcategory)
     {
-        //
+        if($subcategory->products->count() > 0) {
+            session()->flash('swal', [
+                'position'=> 'top-end',
+                'icon' => 'error',
+                'title'=> 'No se puede eliminar porque tiene categorias asociadas.'
+            ]);
+
+            return redirect()->route('admin.subcategories.edit');
+        }
+
+        $subcategory->delete();
+
+        session()->flash('swal', [
+            'position'=> 'top-end',
+            'icon' => 'success',
+            'title'=> 'Eliminado con éxito!',
+            'showConfirmButton'=> false,
+            'timer' => 1500
+        ]);
+
+        return redirect()->route('admin.subcategories.index');
     }
 }

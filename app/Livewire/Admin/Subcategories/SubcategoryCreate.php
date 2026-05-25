@@ -45,7 +45,7 @@ class SubcategoryCreate extends Component
             'text'=> 'Registro guardado con éxito!'
         ]);
 
-        return redirect()->route('admin.families.index');
+        return redirect()->route('admin.subcategories.index');
     }
 
     #[Computed()]
