@@ -21,10 +21,10 @@ class SubcategoryEdit extends Component
         $this->families = Family::all();
 
         $this->subcategoryEdit = [
-        'family_id' => $this->subcategory->category->family_id,
-        'category_id' => $this->subcategory->category_id,
-        'name' => $this->subcategory->name
-    ];
+            'family_id' => $this->subcategory->category->family_id,
+            'category_id' => $this->subcategory->category_id,
+            'name' => $this->subcategory->name
+        ];
     }
 
     public function updatedSubcategoryEditFamilyId() {

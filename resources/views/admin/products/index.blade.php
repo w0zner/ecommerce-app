@@ -53,10 +53,10 @@
                             {{ number_format($item->price, 0, ',', '.') }}
                         </td>
                         <td class="flex justify-center px-6 py-4 text-center">
-                            <a href="{{ route('admin.subcategories.edit', $item) }}" role="button" class="btn-accion-editar">
+                            <a href="{{ route('admin.products.edit', $item) }}" role="button" class="btn-accion-editar">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form action="{{ route('admin.subcategories.destroy', $item) }}" method="post" onsubmit="confirmDelete(event)">
+                            <form action="{{ route('admin.products.destroy', $item) }}" method="post" onsubmit="confirmDelete(event)">
                                 @csrf
                                 @method('DELETE')
 
