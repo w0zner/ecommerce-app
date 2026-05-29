@@ -9,7 +9,7 @@
 ]">
 
 <x-slot name="action">
-    <a href="{{ route('admin.subcategories.create') }}" role="button" class="btn btn-neutral">
+    <a href="{{ route('admin.products.create') }}" role="button" class="btn btn-neutral">
         <i class="fa-solid fa-plus"></i> Agregar
     </a>
 </x-slot>
