@@ -30,6 +30,12 @@
             'route' => route('admin.products.index'),
             'active' => request()->routeIs('admin.products.index'),
         ],
+        [
+            'name' => 'Opciones',
+            'icon' => 'fa-solid fa-sliders',
+            'route' => route('admin.options.index'),
+            'active' => request()->routeIs('admin.options.index'),
+        ],
     ];
 @endphp
 
