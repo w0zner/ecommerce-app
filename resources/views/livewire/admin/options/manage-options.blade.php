@@ -2,14 +2,17 @@
 
 <div>
     <div class="flex justify-center items-start flex-col p-4 pt-1">
-        <div class="flex justify-between">
+        <header>
+            <div class="flex justify-between">
             <h1>
                 Opciones
             </h1>
-            <x-button wire:click="$set('openModal', true)" class="btn btn-neutral">
+            <x-button custom wire:click="$set('openModal', true)" class="bg-[#2b3440] text-white text-sm px-4 py-2 hover:bg-[#1d232a]">
                 Agregar
             </x-button>
         </div>
+        </header>
+        
         @foreach ($options as $option)
             <div class="card bg-base-100 card-md shadow-sm">
                 <div class="card-body">
