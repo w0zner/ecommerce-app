@@ -1,17 +1,15 @@
 
 
 <div>
+    <div class="flex w-full justify-between">
+        <h1 class="font-semibold">
+            Opciones
+        </h1>
+        <x-button custom wire:click="$set('openModal', true)" class="bg-[#2b3440] text-white text-sm px-4 py-2 hover:bg-[#1d232a]">
+            <i class="fa-solid fa-plus"></i> Agregar
+        </x-button>
+    </div>
     <div class="flex justify-center items-start flex-col p-4 pt-1">
-        <header>
-            <div class="flex justify-between">
-            <h1>
-                Opciones
-            </h1>
-            <x-button custom wire:click="$set('openModal', true)" class="bg-[#2b3440] text-white text-sm px-4 py-2 hover:bg-[#1d232a]">
-                Agregar
-            </x-button>
-        </div>
-        </header>
 
         @foreach ($options as $option)
             <div class="card bg-base-100 card-md shadow-sm">
@@ -47,6 +45,54 @@
             Crear Opción
         </x-slot>
         <x-slot name="content">
+            <div class="grid grid-cols-2 gap-6">
+                <div>
+                    <x-label class="mb-1">
+                        Nombre
+                    </x-label>
+                    <x-input class="w-full" placeholder="Por ejemplo tamaño, color, etc">    
+                    </x-input>
+                </div>
+                <div>
+                    <x-label class="mb-1">
+                        Tipo
+                    </x-label>
+                    <select class="select select-md">
+                        <option disabled selected>Elige una opcion</option>
+                        <option value="1">Texto</option>
+                        <option value="2">Color</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex justify-center items-center mb-4">
+                <span>Valores</span>
+                  <div class="divider">
+                    
+                  </div>
+            </div>
+            <div class="p-6 rounded-lg border border-gray-600">
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <x-label class="mb-1">
+                            Valor
+                        </x-label>
+                        <x-input class="w-full" placeholder="Valor">    
+                        </x-input>
+                    </div>
+                    <div>
+                        <x-label class="mb-1">
+                            Descripción
+                        </x-label>
+                        <x-input class="w-full" placeholder="Descripción">    
+                        </x-input>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-6 flex justify-end w-full">
+                <x-button custom wire:click="$set('openModal', true)" class="bg-[#2b3440] text-white text-sm px-4 py-2 hover:bg-[#1d232a]">
+                    <i class="fa-solid fa-plus"></i>
+                </x-button>
+            </div>
         </x-slot>
         <x-slot name="footer">
 
