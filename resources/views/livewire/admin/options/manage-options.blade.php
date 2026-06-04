@@ -12,7 +12,7 @@
             </x-button>
         </div>
         </header>
-        
+
         @foreach ($options as $option)
             <div class="card bg-base-100 card-md shadow-sm">
                 <div class="card-body">
@@ -30,9 +30,9 @@
                                     <div class="badge badge-lg badge-outline rounded-md badge-neutral ml-3" style="background-color: {{ $feature->value }}; border: 1px solid #cccccf"></div>
                                     <span class="ml-1">{{$feature->description}}</span>
                                     @break
-                            
+
                                 @default
-                                    
+
                             @endswitch
                         @endforeach
                     </div>
@@ -42,15 +42,14 @@
         @endforeach
     </div>
 
-    <x-modal wire:model="openModal">
+    <x-dialog-modal wire:model="openModal">
         <x-slot name="title">
-
+            Crear Opción
         </x-slot>
         <x-slot name="content">
-
         </x-slot>
         <x-slot name="footer">
 
         </x-slot>
-    </x-modal>
+    </x-dialog-modal>
 </div>
