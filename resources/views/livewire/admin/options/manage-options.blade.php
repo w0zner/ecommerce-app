@@ -50,52 +50,78 @@
                     <x-label class="mb-1">
                         Nombre
                     </x-label>
-                    <x-input class="w-full" placeholder="Por ejemplo tamaño, color, etc">    
+                    <x-input class="w-full" wire:model="newOption.name" placeholder="Por ejemplo tamaño, color, etc">
                     </x-input>
                 </div>
                 <div>
-                    <x-label class="mb-1">
+                    <x-label class="mb-1 block text-sm font-medium text-white">
                         Tipo
                     </x-label>
-                    <select class="select select-md">
-                        <option disabled selected>Elige una opcion</option>
+                    <select data-theme="dark" class="bg-[#2b3440]  rounded-lg select select-md select-bordered w-full text-white" wire:model="newOption.type">
+                        <option disabled selected value="">Elige una opcion</option>
                         <option value="1">Texto</option>
                         <option value="2">Color</option>
                     </select>
                 </div>
             </div>
             <div class="flex justify-center items-center mb-4">
-                <span>Valores</span>
-                  <div class="divider">
-                    
-                  </div>
+                <h3 class="text-lg font-bold text-white">Valores</h3>
+                <div class="divider">
+                </div>
             </div>
-            <div class="p-6 rounded-lg border border-gray-600">
-                <div class="grid grid-cols-2 gap-6">
+            @foreach ($newOption['features'] as $index => $feature)
+            <div class="p-2 rounded-lg border border-gray-700 mb-1">
+
+                    <div class="grid grid-cols-2 gap-6 mb-4">
+                        <div>
+                            <x-label class="mb-1">
+                                Valor
+                            </x-label>
+                            <x-input class="w-full" placeholder="Valor" wire:model="newOption.features.{{ $index }}.value">
+                            </x-input>
+                        </div>
+                        <div>
+                            <x-label class="mb-1">
+                                Descripción
+                            </x-label>
+                            <x-input class="w-full" placeholder="Descripción" wire:model="newOption.features.{{ $index }}.description">
+                            </x-input>
+                        </div>
+
+                    </div>
+                    @if ($index > 0)
+                        <button class="btn btn-sm btn-soft btn-error w-full" type="button" wire:click="removeFeature({{ $index }})">
+                            <i class="fa-solid fa-trash text-white"></i>
+                        </button>
+                    @endif
+                {{-- <div class="grid grid-cols-2 gap-6">
                     <div>
                         <x-label class="mb-1">
                             Valor
                         </x-label>
-                        <x-input class="w-full" placeholder="Valor">    
+                        <x-input class="w-full" placeholder="Valor">
                         </x-input>
                     </div>
                     <div>
                         <x-label class="mb-1">
                             Descripción
                         </x-label>
-                        <x-input class="w-full" placeholder="Descripción">    
+                        <x-input class="w-full" placeholder="Descripción">
                         </x-input>
                     </div>
-                </div>
+                </div> --}}
             </div>
+            @endforeach
             <div class="pt-6 flex justify-end w-full">
-                <x-button custom wire:click="$set('openModal', true)" class="bg-[#2b3440] text-white text-sm px-4 py-2 hover:bg-[#1d232a]">
+                <x-button custom wire:click="addFeature()" class="bg-[#30503c] text-white text-sm px-4 py-2 hover:bg-[#1d232a]">
                     <i class="fa-solid fa-plus"></i>
                 </x-button>
             </div>
         </x-slot>
         <x-slot name="footer">
-
+            <button class="btn btn-sm btn-neutral w-full" type="button" wire:click="save()">
+                <i class="fa-solid fa-save text-white"></i>
+            </button>
         </x-slot>
     </x-dialog-modal>
 </div>

@@ -18,8 +18,58 @@ class ManageOptions extends Component
     //public $options;
     public $openModal=false;
 
+    public $newOption=[
+        'name' => '',
+        'type' => '',
+        'features' => [
+            [
+                'value' => '',
+                'description' => ''
+            ]
+        ]
+    ];
+
     public function mount() {
 
+    }
+
+    public function addFeature() {
+        $this->newOption['features'][] = [
+            'value' => '',
+            'description' => ''
+        ];
+    }
+
+    public function removeFeature($index) {
+        if($index != 0) {
+            unset($this->newOption['features'][$index]);
+            $this->newOption['features'] = array_values($this->newOption['features']);
+        }
+    }
+
+    public function save() {
+        $rules = [
+            'newOption.name' => 'required',
+            'newOption.type' => 'required|in:1,2',
+            'newOption.features' => 'required|array|min:1',
+        ];
+
+        $this->validate($rules);
+
+        $option = Option::create([
+            'name' => $this->newOption['name'],
+            'type' => $this->newOption['type']
+        ]);
+
+        foreach ($this->newOption['features'] as $feature) {
+            $option->features()->create([
+                'value' => $feature['value'],
+                'description' => $feature['description']
+            ]);
+        }
+
+        $this->reset('newOption');
+        $this->openModal = false;
     }
 
     public function render()
