@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Options;
 
+use App\Livewire\Forms\Admin\Options\NewOptionForm;
 use App\Models\Option;
 use Livewire\Component;
 
@@ -14,61 +15,20 @@ class ManageOptions extends Component
     //entonces lo dejamos en el render para que se ejecute cada vez que se actualice el componente,
     //y así no da error de lazy loading
     //otra variante seria agregar #[Locked] a la propiedad de options
-
-    //public $options;
     public $openModal=false;
 
-    public $newOption=[
-        'name' => '',
-        'type' => '',
-        'features' => [
-            [
-                'value' => '',
-                'description' => ''
-            ]
-        ]
-    ];
-
-    public function mount() {
-
-    }
+    public NewOptionForm $newOption;
 
     public function addFeature() {
-        $this->newOption['features'][] = [
-            'value' => '',
-            'description' => ''
-        ];
+        $this->newOption->addFeature();
     }
 
     public function removeFeature($index) {
-        if($index != 0) {
-            unset($this->newOption['features'][$index]);
-            $this->newOption['features'] = array_values($this->newOption['features']);
-        }
+        $this->newOption->removeFeature($index);
     }
 
     public function save() {
-        $rules = [
-            'newOption.name' => 'required',
-            'newOption.type' => 'required|in:1,2',
-            'newOption.features' => 'required|array|min:1',
-        ];
-
-        $this->validate($rules);
-
-        $option = Option::create([
-            'name' => $this->newOption['name'],
-            'type' => $this->newOption['type']
-        ]);
-
-        foreach ($this->newOption['features'] as $feature) {
-            $option->features()->create([
-                'value' => $feature['value'],
-                'description' => $feature['description']
-            ]);
-        }
-
-        $this->reset('newOption');
+        $this->newOption->save();
         $this->openModal = false;
     }
 

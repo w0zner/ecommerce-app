@@ -52,6 +52,9 @@
                     </x-label>
                     <x-input class="w-full" wire:model="newOption.name" placeholder="Por ejemplo tamaño, color, etc">
                     </x-input>
+                    @error('newOption.name')                                 
+                        <span class="text-red-500 text-xs">{{ $message }}</span> 
+                    @enderror
                 </div>
                 <div>
                     <x-label class="mb-1 block text-sm font-medium text-white">
@@ -62,6 +65,9 @@
                         <option value="1">Texto</option>
                         <option value="2">Color</option>
                     </select>
+                    @error('newOption.type')                                 
+                        <span class="text-red-500 text-xs">{{ $message }}</span> 
+                    @enderror
                 </div>
             </div>
             <div class="flex justify-center items-center mb-4">
@@ -69,7 +75,7 @@
                 <div class="divider">
                 </div>
             </div>
-            @foreach ($newOption['features'] as $index => $feature)
+            @foreach ($newOption->features as $index => $feature)
             <div class="p-2 rounded-lg border border-gray-700 mb-1">
 
                     <div class="grid grid-cols-2 gap-6 mb-4">
@@ -79,6 +85,9 @@
                             </x-label>
                             <x-input class="w-full" placeholder="Valor" wire:model="newOption.features.{{ $index }}.value">
                             </x-input>
+                            @error('newOption.features.{{ $index }}.value')                                 
+                                <span class="text-red-500 text-xs">{{ $message }}</span> 
+                            @enderror
                         </div>
                         <div>
                             <x-label class="mb-1">
@@ -86,6 +95,9 @@
                             </x-label>
                             <x-input class="w-full" placeholder="Descripción" wire:model="newOption.features.{{ $index }}.description">
                             </x-input>
+                            @error('newOption.features.*.description')                                 
+                                <span class="text-red-500 text-xs">{{ $message }}</span> 
+                            @enderror
                         </div>
 
                     </div>
