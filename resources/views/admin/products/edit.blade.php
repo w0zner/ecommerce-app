@@ -17,7 +17,12 @@
         <div class="card-body">
             <h2 class="card-title">Editar Productos</h2>
 
-            @livewire('admin.products.product-edit', compact('product'))
+            <div class="mb-12">
+                @livewire('admin.products.product-edit', ['product' => $product], key('product-edit-'.$product->id))
+            </div>
+
+            @livewire('admin.products.product-variants', ['product' => $product], key('product-variants-'.$product->id))
+            
 
         </div>
     </div>
