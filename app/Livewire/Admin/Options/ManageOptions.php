@@ -16,6 +16,7 @@ class ManageOptions extends Component
     //y así no da error de lazy loading
     //otra variante seria agregar #[Locked] a la propiedad de options
     public $openModal=false;
+    public $modo = 'create';
 
     public NewOptionForm $newOption;
 
@@ -27,8 +28,29 @@ class ManageOptions extends Component
         $this->newOption->removeFeature($index);
     }
 
+    public function mount(?Option $option = null)
+{
+    // El signo '?' antes de Option permite que sea null
+    // '= null' le da un valor por defecto si no se envía desde el Blade
+
+    if ($option && $option->exists) {
+        // MODO EDICIÓN: Si pasaron una opción y existe en la Base de Datos
+        $this->newOption->setOption($option);
+        $this->openModal = true;
+        $this->modo = 'edit';
+    } else {
+        // MODO CREACIÓN/LISTADO: Si entran normal, nos aseguramos de que empiece limpio
+        $this->newOption->reset();
+        $this->modo = 'create';
+    }
+}
+
     public function save() {
-        $this->newOption->save();
+        if($this->modo == 'create') {
+            $this->newOption->save();
+        } else {
+            $this->newOption->update();
+        }
         $this->openModal = false;
     }
 

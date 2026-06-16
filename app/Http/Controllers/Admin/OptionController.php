@@ -45,7 +45,8 @@ class OptionController extends Controller
      */
     public function edit(Option $option)
     {
-        //
+        $option->load('features');
+        return view('admin.options.index', compact('option'));
     }
 
     /**
@@ -61,6 +62,13 @@ class OptionController extends Controller
      */
     public function destroy(Option $option)
     {
-        //
+        if($option->features->count() > 0) {
+            $option->features()->delete();
+            $option->delete();
+        } else {
+            $option->delete();
+        }
+
+        return redirect()->route('admin.options.index')->with('success', 'Opción eliminada correctamente.');
     }
 }

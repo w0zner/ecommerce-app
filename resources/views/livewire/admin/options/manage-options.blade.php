@@ -10,11 +10,24 @@
         </x-button>
     </div>
     <div class="flex justify-center items-start flex-col p-4 pt-1">
-
         @foreach ($options as $option)
             <div class="card bg-base-100 card-md shadow-sm">
                 <div class="card-body">
-                    <h2 class="card-title"> {{ $option->name; }}</h2>
+                    <div class="flex justify-between gap-2">
+                        <h2 class="card-title"> {{ $option->name; }}</h2>
+                        <a href="{{ route('admin.options.edit', $option) }}" role="button" class="btn-accion-editar">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <form action="{{ route('admin.options.destroy', $option) }}" method="post" onsubmit="confirmDelete(event)">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn-accion-eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                    </div>
+
                     {{-- <div class="justify-end card-actions">
                         <button class="btn btn-primary">Buy Now</button>
                     </div> --}}
@@ -34,6 +47,9 @@
                             @endswitch
                         @endforeach
                     </div>
+                    <div class="justify-end card-actions mt-4">
+
+                    </div>
                     <div class="divider"></div>
                 </div>
             </div>
@@ -52,8 +68,8 @@
                     </x-label>
                     <x-input class="w-full" wire:model="newOption.name" placeholder="Por ejemplo tamaño, color, etc">
                     </x-input>
-                    @error('newOption.name')                                 
-                        <span class="text-red-500 text-xs">{{ $message }}</span> 
+                    @error('newOption.name')
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
                 <div>
@@ -65,8 +81,8 @@
                         <option value="1">Texto</option>
                         <option value="2">Color</option>
                     </select>
-                    @error('newOption.type')                                 
-                        <span class="text-red-500 text-xs">{{ $message }}</span> 
+                    @error('newOption.type')
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
@@ -85,8 +101,8 @@
                             </x-label>
                             <x-input class="w-full" placeholder="Valor" wire:model="newOption.features.{{ $index }}.value">
                             </x-input>
-                            @error('newOption.features.{{ $index }}.value')                                 
-                                <span class="text-red-500 text-xs">{{ $message }}</span> 
+                            @error('newOption.features.{{ $index }}.value')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
@@ -95,8 +111,8 @@
                             </x-label>
                             <x-input class="w-full" placeholder="Descripción" wire:model="newOption.features.{{ $index }}.description">
                             </x-input>
-                            @error('newOption.features.*.description')                                 
-                                <span class="text-red-500 text-xs">{{ $message }}</span> 
+                            @error('newOption.features.*.description')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
 

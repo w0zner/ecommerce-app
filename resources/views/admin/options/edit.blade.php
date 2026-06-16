@@ -4,29 +4,22 @@
             'route' => route('admin.dashboard'),
     ],
     [
-            'name' => 'Opciones',
+        'name' => 'Opciones',
+        'route' => route('admin.options.index')
+    ],
+    [
+            'name' => 'Editar',
     ],
 ]">
 
-{{-- <x-slot name="action">
-    <a wire:click="$set('openModal', true)" role="button" class="btn btn-neutral">
-        <i class="fa-solid fa-plus"></i> Agregar
-    </a>
-</x-slot> --}}
-
-
-@isset($option)
-    @livewire('admin.options.manage-options', ['option' => $option])
-@else
-    @livewire('admin.options.manage-options')
-@endisset
+@livewire('admin.options.manage-options', ['option' => $option])
 
 @push('js')
     <script>
         function confirmDelete(event) {
             event.preventDefault();
             Swal.fire({
-            title: "Esta seguro de eliminar la opción con sus características?",
+            title: "Esta seguro de eliminar el registro?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#097969",
