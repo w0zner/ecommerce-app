@@ -5,7 +5,8 @@
         <h1 class="font-semibold">
             Opciones
         </h1>
-        <x-button custom wire:click="$set('openModal', true)" class="bg-[#2b3440] text-white text-sm px-4 py-2 hover:bg-[#1d232a]">
+        {{-- wire:click="$set('openModal', true)" --}}
+        <x-button custom wire:click="openModalForSave()" class="bg-[#2b3440] text-white text-sm px-4 py-2 hover:bg-[#1d232a]">
             <i class="fa-solid fa-plus"></i> Agregar
         </x-button>
     </div>
@@ -15,12 +16,12 @@
                 <div class="card-body">
                     <div class="flex justify-between gap-2">
                         <h2 class="card-title"> {{ $option->name; }}</h2>
-                        <button class="btn btn-sm btn-neutral" wire:click="openModalForOption({{ $option->id }})">
-                            <i class="fa-solid fa-plus"></i> Agregar Valor
-                        </button>
-                        <a href="{{ route('admin.options.edit', $option) }}" wire:click="$set('editingOptionId', {{ $option->id }})" role="button" class="btn-accion-editar">
+                        <button class="btn-accion-editar" wire:click="openModalForOption({{ $option->id }})">
                             <i class="fas fa-edit"></i>
-                        </a>
+                        </button>
+                        {{-- <a href="{{ route('admin.options.edit', $option) }}" wire:click="$set('editingOptionId', {{ $option->id }})" role="button" class="btn-accion-editar">
+                            <i class="fas fa-edit"></i>
+                        </a> --}}
                         <form action="{{ route('admin.options.destroy', $option) }}" method="post" onsubmit="confirmDelete(event)">
                                 @csrf
                                 @method('DELETE')

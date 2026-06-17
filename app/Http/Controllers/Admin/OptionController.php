@@ -45,8 +45,8 @@ class OptionController extends Controller
      */
     public function edit(Option $option)
     {
-        $option->load('features');
-        return view('admin.options.index', compact('option'));
+        //$option->load('features');
+        //return view('admin.options.index', compact('option'));
     }
 
     /**
@@ -69,6 +69,14 @@ class OptionController extends Controller
             $option->delete();
         }
 
-        return redirect()->route('admin.options.index')->with('success', 'Opción eliminada correctamente.');
+        session()->flash('swal', [
+            'position'=> 'top-end',
+            'icon' => 'success',
+            'title'=> 'Opción eliminada con éxito!',
+            'showConfirmButton'=> false,
+            'timer' => 1500
+        ]);
+
+        return redirect()->route('admin.options.index');
     }
 }

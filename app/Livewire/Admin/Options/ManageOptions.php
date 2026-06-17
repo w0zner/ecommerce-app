@@ -35,6 +35,11 @@ class ManageOptions extends Component
         $this->modo = 'edit';
     }
 
+    public function openModalForSave() {
+        $this->newOption->reset();
+        $this->openModal = true;
+    }
+
     public function mount(?Option $option = null)
 {
     // El signo '?' antes de Option permite que sea null
