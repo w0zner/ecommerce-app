@@ -28,10 +28,18 @@ class ManageOptions extends Component
         $this->newOption->removeFeature($index);
     }
 
+    public function openModalForOption($optionId) {
+        $option = Option::findOrFail($optionId);
+        $this->newOption->setOption($option);
+        $this->openModal = true;
+        $this->modo = 'edit';
+    }
+
     public function mount(?Option $option = null)
 {
     // El signo '?' antes de Option permite que sea null
     // '= null' le da un valor por defecto si no se envía desde el Blade
+    //dd($option);
 
     if ($option && $option->exists) {
         // MODO EDICIÓN: Si pasaron una opción y existe en la Base de Datos
