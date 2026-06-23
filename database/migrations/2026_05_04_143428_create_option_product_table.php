@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('option_id')->constrained();
             $table->foreignId('product_id')->constrained();
-            $table->string('feature_value');
+            $table->json('features')->nullable();
             $table->timestamps();
         });
     }
