@@ -11,7 +11,18 @@
             </div>
         </header>
         <div class="p-4">
-
+            <div class="space-y-6">
+                @foreach($product->options as $option)
+                    <div class="bg-gray-50 p-2 rounded-md relative" wire:key="product-option-{{ $option->id }}">
+                        <div class="absolute -top-3 px-4">
+                            <button>
+                                <i class="fa-solid fa-trash-can text-red-500 hover:text-red-600"></i>
+                            </button>
+                            <span class="text-sm text-gray-500">{{ $option->name }}</span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </section>
 
@@ -66,7 +77,7 @@
                         </li>
                     @endforeach
                 </ul>
-@error('variant.features.*.id')
+                @error('variant.features.*.id')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
 

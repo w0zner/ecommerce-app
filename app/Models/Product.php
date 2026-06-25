@@ -17,11 +17,11 @@ class Product extends Model
         'subcategory_id'
     ];
     //
-    public function Subcategory() {
+    public function subcategory() {
          return $this->belongsTo(Subcategory::class);
     }
 
-    public function Variants() {
+    public function variants() {
         return $this->hasMany(Variant::class);
     }
 
