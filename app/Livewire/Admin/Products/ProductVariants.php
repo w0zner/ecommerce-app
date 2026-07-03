@@ -11,7 +11,7 @@ use Livewire\Component;
 class ProductVariants extends Component
 {
     public Product $product;
-    public $openModal = true;
+    public $openModal = false;
     public $options = [];
     public $variant = [
         'option_id' => '',
@@ -49,6 +49,38 @@ class ProductVariants extends Component
         }
     }
 
+    public function deleteOption($optionId) {
+        $this->product->options()->detach($optionId);
+        $this->product->load('options');
+    }
+
+    public function removeFeatureFromOption($optionId, $featureId) {
+
+        $option = $this->product->options()->where('option_id', $optionId)->first();
+
+        if ($option) {
+            $features = $option->pivot->features;
+            $filteredFeatures = array_filter($features, fn($f) => $f['id'] != $featureId);
+
+            // $filteredFeatures = array_filter($features, function ($feature) use ($featureId) {
+            //     return $feature['id'] != $featureId;
+            // });
+
+            $filteredFeatures = array_values($filteredFeatures);
+
+
+            if (empty($filteredFeatures)) {
+                $this->product->options()->detach($optionId);
+            } else {
+                $this->product->options()->updateExistingPivot($optionId, [
+                    'features' => $filteredFeatures
+                ]);
+            }
+
+            $this->product->load('options');
+        }
+    }
+
     public function featureChange($index) {
         $feature = Feature::find($this->variant['features'][$index]['id']);
         if($feature) {
@@ -71,6 +103,12 @@ class ProductVariants extends Component
     }
 
     public function save() {
+
+        if($this->product->options()->where('option_id', $this->variant['option_id'])->exists()) {
+            $this->addError('variant.option_id', 'Esta opción ya ha sido agregada al producto.');
+            return;
+        }
+
         $this->validate([
             'variant.option_id' => 'required|exists:options,id',
             'variant.features' => 'required|array|min:1',
@@ -90,6 +128,11 @@ class ProductVariants extends Component
 
     public function render()
     {
+        $this->product->loadMissing([
+            'options',
+            'variants.features',
+        ]);
+
         return view('livewire.admin.products.product-variants');
     }
 }

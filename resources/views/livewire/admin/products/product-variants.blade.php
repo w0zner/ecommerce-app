@@ -1,5 +1,5 @@
 <div>
-    <section class="rounded-lg bg-white p-4 shadow-md">
+    <section class="rounded-lg bg-white p-4 shadow-md mb-12">
         <header class="border-b border-gray-200 px-6 py-2">
             <div class="flex justify-between">
                 <h1>
@@ -12,17 +12,80 @@
         </header>
         <div class="p-4">
             <div class="space-y-6">
+                @if($product->options->isEmpty())
+                    <div role="alert" class="alert">
+                        <i class="fa-solid fa-info-circle"></i>
+                        <span>No hay opciones agregadas al producto.</span>
+                    </div>
+                @endif
                 @foreach($product->options as $option)
-                    <div class="bg-gray-50 p-2 rounded-md relative" wire:key="product-option-{{ $option->id }}">
-                        <div class="absolute -top-3 px-4">
-                            <button>
+                    <div class="bg-gray-50 border border-gray-200 p-2 rounded-md relative p-6" wire:key="product-option-{{ $option->id }}">
+                        <div class="absolute -top-3 px-4 bg-white">
+                            <button wire:click="deleteOption({{ $option->id }})" class="mr-2">
                                 <i class="fa-solid fa-trash-can text-red-500 hover:text-red-600"></i>
                             </button>
                             <span class="text-sm text-gray-500">{{ $option->name }}</span>
                         </div>
+
+                        {{--valores--}}
+                        <div class="flex flex-wrap gap-2">
+                            @foreach($option->pivot->features as $feature)
+                                <div class="flex items-start gap-2 mb-2">
+                                    <div class="flex items-center gap-2">
+                                        @switch($option['type'])
+                                            @case(2)
+                                                <div class="badge badge-neutral badge-outline text-sm text-gray-{{ $feature['id'] }} rounded-md" wire:key="feature-{{ $feature['id'] }}">
+                                                    <span class="badge badge-xs mr-2" style="background-color: {{ $feature['value'] }}; border: 1px solid #ccc;"></span>
+                                                    {{ $feature['description'] }}
+                                                    <button class="ml-2" wire:click="removeFeatureFromOption({{ $option->id }}, {{ $feature['id'] }})">
+                                                        <i class="fa-solid fa-xmark text-red-500 hover:text-red-600"></i>
+                                                    </button>
+                                                </div>
+                                                @break
+                                            @case(1)
+                                                <div class="badge badge-neutral badge-outline text-sm text-gray-200 rounded-md">
+                                                    {{ $feature['description'] }}
+                                                    <button class="ml-2" wire:click="removeFeatureFromOption({{ $option->id }}, {{ $feature['id'] }})">
+                                                        <i class="fa-solid fa-xmark text-red-500 hover:text-red-600"></i>
+                                                    </button>
+                                                </div>
+                                                @break
+                                            @default
+                                                <span class="text-sm text-gray-200">{{ $feature['description'] }}</span>
+                                        @endswitch
+
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 @endforeach
             </div>
+        </div>
+    </section>
+
+    <section class="rounded-lg bg-white p-4 shadow-md">
+        <header class="border-b border-gray-200 px-6 py-2">
+            <div class="flex justify-between">
+                <h1>
+                    Variantes
+                </h1>
+            </div>
+        </header>
+        <div class="p-4">
+            <ul>
+                @foreach($product->variants as $variant)
+                    <li class="border border-gray-200 rounded-md p-2 mb-2 flex items-center gap-2" wire:key="product-variant-{{ $variant->id }}">
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm text-gray-500">
+                                @foreach($variant->features as $feature)
+                                    {{ $feature->description }}@if(!$loop->last), @endif
+                                @endforeach
+                            </span>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
         </div>
     </section>
 
