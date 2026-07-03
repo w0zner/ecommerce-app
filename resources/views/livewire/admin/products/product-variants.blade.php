@@ -62,32 +62,42 @@
                 @endforeach
             </div>
         </div>
+        <footer class="px-6 py-2">
+            <div class="flex justify-end">
+                <x-button custom class="bg-[#422ad5] text-white text-sm px-4 py-2 hover:bg-[#1d232a]">
+                    <i class="fa-solid fa-gears mr-2"></i>  Generar Variantes
+                </x-button>
+            </div>
+        </footer>
     </section>
 
-    <section class="rounded-lg bg-white p-4 shadow-md">
-        <header class="border-b border-gray-200 px-6 py-2">
-            <div class="flex justify-between">
-                <h1>
-                    Variantes
-                </h1>
+    @if (!$product->variants->isEmpty())
+        <section class="rounded-lg bg-white p-4 shadow-md">
+            <header class="border-b border-gray-200 px-6 py-2">
+                <div class="flex justify-between">
+                    <h1>
+                        Variantes
+                    </h1>
+                </div>
+            </header>
+            <div class="p-4">
+                <ul>
+                    @foreach($product->variants as $variant)
+                        <li class="border border-gray-200 rounded-md p-2 mb-2 flex items-center gap-2" wire:key="product-variant-{{ $variant->id }}">
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm text-gray-500">
+                                    @foreach($variant->features as $feature)
+                                        {{ $feature->description }}@if(!$loop->last), @endif
+                                    @endforeach
+                                </span>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
-        </header>
-        <div class="p-4">
-            <ul>
-                @foreach($product->variants as $variant)
-                    <li class="border border-gray-200 rounded-md p-2 mb-2 flex items-center gap-2" wire:key="product-variant-{{ $variant->id }}">
-                        <div class="flex items-center gap-2">
-                            <span class="text-sm text-gray-500">
-                                @foreach($variant->features as $feature)
-                                    {{ $feature->description }}@if(!$loop->last), @endif
-                                @endforeach
-                            </span>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </section>
+        </section>
+    @endif
+
 
     <x-dialog-modal wire:model="openModal">
         <x-slot name="title">
