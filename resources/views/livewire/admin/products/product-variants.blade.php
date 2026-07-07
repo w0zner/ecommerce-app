@@ -64,7 +64,7 @@
         </div>
         <footer class="px-6 py-2">
             <div class="flex justify-end">
-                <x-button custom class="bg-[#422ad5] text-white text-sm px-4 py-2 hover:bg-[#1d232a]">
+                <x-button wire:click="generarVariantes()" custom class="bg-[#422ad5] text-white text-sm px-4 py-2 hover:bg-[#1d232a]">
                     <i class="fa-solid fa-gears mr-2"></i>  Generar Variantes
                 </x-button>
             </div>

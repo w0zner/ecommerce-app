@@ -53,7 +53,7 @@ class ProductVariants extends Component
     public function deleteOption($optionId) {
         $this->product->options()->detach($optionId);
         $this->product->load('options');
-        $this->generarVariantes();
+        //$this->generarVariantes();
     }
 
     public function removeFeatureFromOption($optionId, $featureId) {
@@ -81,7 +81,7 @@ class ProductVariants extends Component
 
             $this->product->load('options');
 
-            $this->generarVariantes();
+            //$this->generarVariantes();
         }
     }
 
@@ -127,7 +127,7 @@ class ProductVariants extends Component
             'features' => $this->variant['features']  //si no hubieramos creado el modelo intermedio OptionProduct, tendriamos que hacer un json_encode($this->variant['features']) para guardarlo como string en la base de datos
         ]);
 
-        $this->generarVariantes();
+        //$this->generarVariantes();
 
         $this->reset(['variant', 'openModal']);
     }
