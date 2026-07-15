@@ -27,6 +27,7 @@ class ProductEdit extends Component
         'description' => '',
         'image_path' => '',
         'price' => '',
+        'stock'=> '',
         'subcategory_id' => '',
     ];
 
@@ -39,6 +40,7 @@ class ProductEdit extends Component
             'description' => $this->product->description,
             'image_path' => $this->product->image_path,
             'price' => $this->product->price,
+            'stock' => $this->product->stock,
             'subcategory_id' => $this->product->subcategory_id,
         ];
 
@@ -68,6 +70,7 @@ class ProductEdit extends Component
             'productEdit.name' => 'required|string|max:255|unique:products,name,'. $this->product->id,
             'productEdit.description' => 'required|string|max:500',
             'productEdit.price' => 'required|numeric|min:0',
+            'productEdit.stock' => 'required|numeric|min:0',
             'family_id' => 'required|exists:families,id',
             'category_id' => 'required|exists:categories,id',
             'productEdit.subcategory_id' => 'required|exists:subcategories,id',
@@ -76,6 +79,7 @@ class ProductEdit extends Component
             'productEdit.sku' => 'sku',
             'productEdit.name' => 'nombre',
             'productEdit.description' => 'descripción',
+            'productEdit.stock' => 'stock',
             'family_id' => 'familia',
             'category_id' => 'categoría',
             'productEdit.subcategory_id' => 'subcategoria'

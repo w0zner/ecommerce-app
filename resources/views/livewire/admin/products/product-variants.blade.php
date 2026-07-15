@@ -1,5 +1,5 @@
 <div>
-    <section class="rounded-lg bg-white p-4 shadow-md mb-12">
+    <section class="rounded-lg bg-white p-4 shadow-md mb-12 bg-gray-100 border border-gray-200">
         <header class="border-b border-gray-200 px-6 py-2">
             <div class="flex justify-between">
                 <h1>

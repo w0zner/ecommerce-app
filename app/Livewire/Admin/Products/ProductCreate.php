@@ -27,6 +27,7 @@ class ProductCreate extends Component
         'description' => '',
         'image_path' => '',
         'price' => '',
+        'stock' => '',
         'subcategory_id' => '',
     ];
 
@@ -52,6 +53,7 @@ class ProductCreate extends Component
             'product.name' => 'required|string|unique:products,name|max:255',
             'product.description' => 'required|string|max:500',
             'product.price' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
+            'product.stock' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
             'family_id' => 'required|exists:families,id',
             'category_id' => 'required|exists:categories,id',
             'product.subcategory_id' => 'required|exists:subcategories,id',
@@ -60,6 +62,7 @@ class ProductCreate extends Component
             'product.sku' => 'sku',
             'product.name' => 'nombre',
             'product.description' => 'descripción',
+            'product.stock' => 'stock',
             'family_id' => 'familia',
             'category_id' => 'categoría',
             'product.subcategory_id' => 'subcategoria'

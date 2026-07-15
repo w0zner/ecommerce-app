@@ -71,6 +71,14 @@
             @enderror
         </fieldset>
 
+        <fieldset class="fieldset mt-4">
+            <legend class="fieldset-legend">Stock</legend>
+            <input wire:model.live="product.stock" type="number" placeholder="Introduce el stock" class="input w-full border border-gray-300" />
+            @error('product.stock') 
+                <span class="text-red-500 text-xs">{{ $message }}</span> 
+            @enderror
+        </fieldset>
+
          <fieldset class="fieldset mt-4">
             <legend class="fieldset-legend">Familia</legend>
 

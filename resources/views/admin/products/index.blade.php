@@ -32,6 +32,9 @@
                     <th scope="col" class="px-6 py-3 font-medium">
                         Precio
                     </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Stock
+                    </th>
                     <th scope="col" class="px-6 py-3 font-medium text-center">
                         Acciones
                     </th>
@@ -51,6 +54,9 @@
                         </td>
                         <td class="px-6 py-4 text-right">
                             {{ number_format($item->price, 0, ',', '.') }}
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            {{ number_format($item->stock, 0, ',', '.') }}
                         </td>
                         <td class="flex justify-center px-6 py-4 text-center">
                             <a href="{{ route('admin.products.edit', $item) }}" role="button" class="btn-accion-editar">
