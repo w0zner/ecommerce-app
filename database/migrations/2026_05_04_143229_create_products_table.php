@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('image_path');
             $table->float('price');
+            $table->integer('stock')->unsigned()->default(0);
             $table->foreignId('subcategory_id')->constrained();
             $table->timestamps();
         });

@@ -82,15 +82,18 @@
             </header>
             <div class="p-4">
                 <ul>
-                    @foreach($product->variants as $variant)
-                        <li class="border border-gray-200 rounded-md p-2 mb-2 flex items-center gap-2" wire:key="product-variant-{{ $variant->id }}">
+                    @foreach($product->variants as $item_variant)
+                        <li class="border border-gray-200 rounded-md p-2 mb-2 flex items-center gap-2" wire:key="product-variant-{{ $item_variant->id }}">
                             <div class="flex items-center gap-2">
-                                <span class="text-sm text-gray-500">
-                                    @foreach($variant->features as $feature)
+                                <img src="{{$item_variant->image}}" style="transform: scale(0.5)" class="w-28 h-28 object-cover object-center"  alt="{{$item_variant->image_path ? $item_variant->image_path : 'Imagen de producto'}}">
+                                <span class="text-sm text-gray-600">
+                                    @foreach($item_variant->features as $feature)
                                         {{ $feature->description }}@if(!$loop->last), @endif
                                     @endforeach
                                 </span>
+
                             </div>
+                            <a href="{{ route('admin.products.variants', [$product, $item_variant]) }}" class="ml-auto mr-5 btn btn-sm btn-primary">Editar</a>
                         </li>
                     @endforeach
                 </ul>
