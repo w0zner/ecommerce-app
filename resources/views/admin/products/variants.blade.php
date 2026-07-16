@@ -16,8 +16,9 @@
     ]
 ]">
 
-    <form action="">
+    <form action="{{ route('admin.products.variantsUpdate', [$product, $variant]) }}">
         @csrf
+        @method('PUT')
         <div class="relative mb-6">
             <figure>
                 <img class="aspect-[16/9] w-full object-cover object-center" id="imgPreview" src="{{$variant->image}}" alt="">
@@ -34,12 +35,27 @@
             <div class="mb-4">
                 <fieldset class="fieldset mt-4">
                     <label class="label" for="sku">Código SKU</label>
-                    <input name="sku" type="text" placeholder="Ingrese el código SKU" class="input w-full border border-gray-300" />
+                    <input name="sku" type="text" value="{{ old('sku', $variant->sku) }}" placeholder="Ingrese el código SKU" class="input w-full border border-gray-300" />
 {{--                     @error('product.sku')
                         <span class="text-red-500 text-xs">{{ $message }}</span>
                     @enderror --}}
                 </fieldset>
             </div>
+            <div class="mb-4">
+                <fieldset class="fieldset mt-4">
+                    <label class="label" for="sku">Stock</label>
+                    <input name="sku" type="number" value="{{ old('stock', $variant->stock) }}" placeholder="Ingrese el stock del producto" class="input w-full border border-gray-300" />
+{{--                     @error('product.sku')
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                    @enderror --}}
+                </fieldset>
+            </div>
+        </div>
+        <div class="flex justify-end">
+            <button class="btn btn-neutral" type="submit">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                Actualizar
+            </button>
         </div>
     </div>
 

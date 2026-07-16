@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -59,6 +60,11 @@ class ProductEdit extends Component
     #[Computed()]
     public function subcategories() {
         return Subcategory::where('category_id', $this->category_id)->get();
+    }
+
+    #[On('variant-generate')]
+    public function refreshProduct() {
+        $this->product=$this->product->fresh();
     }
 
     public function save() {

@@ -46,13 +46,15 @@
             @enderror
         </fieldset>
 
-        <fieldset class="fieldset mt-4">
-            <legend class="fieldset-legend">Stock</legend>
-            <input wire:model.live="productEdit.stock" type="number" placeholder="Introduce el stock" class="input w-full border border-gray-300" />
-            @error('productEdit.stock') 
-                <span class="text-red-500 text-xs">{{ $message }}</span> 
-            @enderror
-        </fieldset>
+        @if($product->variants->isEmpty())
+            <fieldset class="fieldset mt-4">
+                        <legend class="fieldset-legend">Stock</legend>
+                        <input wire:model.live="productEdit.stock" type="number" placeholder="Introduce el stock" class="input w-full border border-gray-300" />
+                        @error('productEdit.stock') 
+                            <span class="text-red-500 text-xs">{{ $message }}</span> 
+                        @enderror
+            </fieldset>
+        @endif
 
          <fieldset class="fieldset mt-4">
             <legend class="fieldset-legend">Familia</legend>
