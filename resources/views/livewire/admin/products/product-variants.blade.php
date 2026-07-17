@@ -93,6 +93,9 @@
                                         {{ $feature->description }}@if(!$loop->last), @endif
                                     @endforeach
                                 </span>
+                                <span class="text-sm text-gray-600 ml-5">
+                                    Stock: {{ $item_variant->stock }}
+                                </span>
 
                             </div>
                             <a href="{{ route('admin.products.variants', [$product, $item_variant]) }}" class="ml-auto mr-5 btn btn-sm btn-primary">Editar</a>

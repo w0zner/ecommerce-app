@@ -16,7 +16,7 @@
     ]
 ]">
 
-    <form action="{{ route('admin.products.variantsUpdate', [$product, $variant]) }}">
+    <form action="{{ route('admin.products.variantsUpdate', [$product, $variant]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="relative mb-6">
@@ -44,7 +44,7 @@
             <div class="mb-4">
                 <fieldset class="fieldset mt-4">
                     <label class="label" for="sku">Stock</label>
-                    <input name="sku" type="number" value="{{ old('stock', $variant->stock) }}" placeholder="Ingrese el stock del producto" class="input w-full border border-gray-300" />
+                    <input name="stock" type="number" value="{{ old('stock', $variant->stock) }}" placeholder="Ingrese el stock del producto" class="input w-full border border-gray-300" />
 {{--                     @error('product.sku')
                         <span class="text-red-500 text-xs">{{ $message }}</span>
                     @enderror --}}
