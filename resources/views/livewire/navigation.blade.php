@@ -36,7 +36,7 @@
 
     <div class="fixed top-0 left-0 z-20">
         <div class="flex">
-            <div class="w-80 h-screen bg-white">
+            <div class="w-screen md:w-80 h-screen bg-white">
                 <div class="bg-purple-600 px-4 py-3 text-white font-semibold">
                     <div class="flex justify-between items-center">
                         <span class="text-lg">
@@ -50,7 +50,7 @@
                 <div class="h-[calc(100vh-52px)] overflow-auto">
                     <ul>
                         @foreach ($families as $family)
-                            <li>
+                            <li wire:mouseover="$set('family_id', {{ $family->id }})">
                                 <a href="" class="flex items-center justify-between px-4 py-4 text-gray-700 hover:bg-purple-200">
                                     {{ $family->name }}
                                     <i class="fa-solid fa-angle-right"></i>
@@ -60,8 +60,34 @@
                     </ul>
                 </div>
             </div>
-            <div>
+            <div class="w-80 xl:w-[57rem] pt-[52px] hidden md:block">
+                <div class="h-[calc(100vh-52px)] overflow-auto bg-white px-6 py-8">
+                    <div class="mb-8 flex justify-between items-center">
+                        <span class="border-b-[3px] border-lime-400 uppercase text-xl font-semibold pb-1">
+                            {{$this->familyName}}
+                        </span>
 
+                        <a href="" class="btn">Ver todo</a>
+                    </div>
+                    <ul class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                        @foreach ($this->categories as $cat)
+                            <li>
+                                <a href="" class="text-purple-600 font-semibold text-lg">
+                                    {{ $cat->name }}
+                                </a>
+                                <ul class="mt-4 space-y-2">
+                                    @foreach ($cat->subcategories as $subcat)
+                                        <li>
+                                            <a href="" class="text-sm text-gray-700 hover:text-purple-600">
+                                                {{ $subcat->name }}
+                                            </a>
+                                        </li>                                        
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
