@@ -1,8 +1,8 @@
-<div>
+<div x-data="{open:false, openMenu:false}">
     <header class="bg-purple-600">
             <x-container class="px-4 py-4">
                 <div class="flex justify-between items-center space-x-8">
-                    <button class="text-2xl btn btn-ghost">
+                    <button class="text-2xl btn btn-ghost" x-on:click="open=true">
                         <i class="fas fa-bars text-white"></i>
                     </button>
                     <h1 class="text-white">
@@ -31,10 +31,10 @@
             </x-container>
     </header>
 
-    <div class="fixed top-0 left-0 inset-0 bg-black bg-opacity-25 z-10">
+    <div x-show="open" x-on:click="open=false" style="display: none;" class="fixed top-0 left-0 inset-0 bg-black bg-opacity-25 z-10">
     </div>
 
-    <div class="fixed top-0 left-0 z-20">
+    <div x-show="open" style="display: none;" class="fixed top-0 left-0 z-20">
         <div class="flex">
             <div class="w-screen md:w-80 h-screen bg-white">
                 <div class="bg-purple-600 px-4 py-3 text-white font-semibold">
@@ -42,7 +42,7 @@
                         <span class="text-lg">
                         Hola
                     </span>
-                    <button>
+                    <button x-on:click="open=false">
                         <i class="fas fa-times"></i>
                     </button>
                     </div>
@@ -50,7 +50,7 @@
                 <div class="h-[calc(100vh-52px)] overflow-auto">
                     <ul>
                         @foreach ($families as $family)
-                            <li wire:mouseover="$set('family_id', {{ $family->id }})">
+                            <li x-on:mouseover="openMenu=true" x-on:mouseout="openMenu=false" wire:mouseover="$set('family_id', {{ $family->id }})">
                                 <a href="" class="flex items-center justify-between px-4 py-4 text-gray-700 hover:bg-purple-200">
                                     {{ $family->name }}
                                     <i class="fa-solid fa-angle-right"></i>
@@ -60,7 +60,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="w-80 xl:w-[57rem] pt-[52px] hidden md:block">
+            <div x-show="openMenu" x-on:mouseover="openMenu=true" class="w-80 xl:w-[57rem] pt-[52px] hidden md:block">
                 <div class="h-[calc(100vh-52px)] overflow-auto bg-white px-6 py-8">
                     <div class="mb-8 flex justify-between items-center">
                         <span class="border-b-[3px] border-lime-400 uppercase text-xl font-semibold pb-1">
