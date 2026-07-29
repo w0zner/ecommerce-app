@@ -16,9 +16,43 @@
                     </div>
 
                     <div class="flex items-center space-x-4 md:space-x-8">
-                        <button class="text-2xl btn btn-ghost">
-                            <i class="fas fa-user text-white"></i>
-                        </button>
+                        <x-dropdown>
+                            <x-slot name="trigger">
+                                <button class="text-2xl btn btn-ghost">
+                                    <i class="fas fa-user text-white"></i>
+                                </button>
+                            </x-slot>
+                            <x-slot name="content">
+                                @guest
+                                    <div class="px-4 py-2">
+                                        <div class="flex justify-center">
+                                            <a href="{{route('login')}}" class="btn">Login</a>
+                                        </div>
+                                        <p class="text-sm text-center">
+                                            No tienes cuenta? <a href="{{route('register')}}" class="text-purpel-600 hover:underline">Registrate</a>
+                                        </p>
+                                    </div>
+                                @else
+
+                                    <x-dropdown-link href="{{route('profile.show')}}">
+                                        Mi perfil
+                                    </x-dropdown-link>
+                                    <div class="border-t border-gray-200"></div>
+                                    <form method="POST" action="{{ route('logout') }}" x-data>
+                                        @csrf
+                                        <x-responsive-nav-link href="{{ route('logout') }}"
+                                                    @click.prevent="$root.submit();">
+                                            {{-- {{ __('Log Out') }} --}}
+                                            Finalizar sesión
+                                        </x-responsive-nav-link>
+                                    </form>
+
+                                @endguest
+
+
+                            </x-slot>
+                        </x-dropdown>
+
                         <button class="text-2xl btn btn-ghost">
                             <i class="fas fa-shopping-cart text-white"></i>
                         </button>
@@ -81,7 +115,7 @@
                                             <a href="" class="text-sm text-gray-700 hover:text-purple-600">
                                                 {{ $subcat->name }}
                                             </a>
-                                        </li>                                        
+                                        </li>
                                     @endforeach
                                 </ul>
                             </li>
