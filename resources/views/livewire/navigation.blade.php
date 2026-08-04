@@ -18,17 +18,23 @@
                     <div class="flex items-center space-x-4 md:space-x-8">
                         <x-dropdown>
                             <x-slot name="trigger">
-                                <button class="text-2xl btn btn-ghost">
-                                    <i class="fas fa-user text-white"></i>
-                                </button>
+                                @auth
+                                    <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                        <img class="size-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                    </button>
+                                @else
+                                    <button class="text-2xl btn btn-ghost">
+                                        <i class="fas fa-user text-white"></i>
+                                    </button>
+                                @endauth
                             </x-slot>
                             <x-slot name="content">
                                 @guest
                                     <div class="px-4 py-2">
                                         <div class="flex justify-center">
-                                            <a href="{{route('login')}}" class="btn">Login</a>
+                                            <a href="{{route('login')}}" class="btn w-full">Login</a>
                                         </div>
-                                        <p class="text-sm text-center">
+                                        <p class="text-sm text-center text-white pt-3">
                                             No tienes cuenta? <a href="{{route('register')}}" class="text-purpel-600 hover:underline">Registrate</a>
                                         </p>
                                     </div>
