@@ -39,7 +39,6 @@
                                         </p>
                                     </div>
                                 @else
-
                                     <x-dropdown-link href="{{route('profile.show')}}">
                                         Mi perfil
                                     </x-dropdown-link>
@@ -52,10 +51,7 @@
                                             Finalizar sesión
                                         </x-responsive-nav-link>
                                     </form>
-
                                 @endguest
-
-
                             </x-slot>
                         </x-dropdown>
 
