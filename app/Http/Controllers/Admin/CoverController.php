@@ -100,6 +100,17 @@ class CoverController extends Controller
      */
     public function destroy(Cover $cover)
     {
-        //
+        $cover->delete();
+        Storage::delete($cover->image_path);
+
+        session()->flash('swal', [
+            'position'=> 'top-end',
+            'icon' => 'success',
+            'title'=> 'Eliminado con éxito!',
+            'showConfirmButton'=> false,
+            'timer' => 1500
+        ]);
+
+        return redirect()->route('admin.covers.index');
     }
 }

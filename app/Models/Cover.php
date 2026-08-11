@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Observers\CoverObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
+#[ObservedBy(CoverObserver::class)]
 class Cover extends Model
 {
     use HasFactory;
@@ -16,7 +19,6 @@ class Cover extends Model
         'start_at',
         'end_at',
         'is_active',
-        'order'
     ];
 
     protected $casts = [

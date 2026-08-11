@@ -30,20 +30,33 @@
 
                     <img src="{{ asset('images/no_image_portada.png') }}" id="imgPreview" alt="Portada" class="w-full aspect-[3/1] object-cover object-center rounded-md">
                 </div>
+                @error('image')
+                        <p class="text-red-500 text-sm">{{ $message }}</p>
+                @enderror
 
                 <fieldset class="fieldset mt-4">
                     <legend class="fieldset-legend">Titulo</legend>
                     <input type="text" placeholder="Titulo de la portada" name="title" value="{{ old('title') }}" class="input w-full border border-gray-300" />
+                    @error('title')
+                        <p class="text-red-500 text-sm">{{ $message }}</p>
+                    @enderror
                 </fieldset>
+
 
                 <fieldset class="fieldset mt-4">
                     <legend class="fieldset-legend">Fecha de inicio</legend>
                     <input type="date" name="start_at" value="{{ old('start_at', now()->format('Y-m-d')) }}" class="input w-full border border-gray-300" />
+                    @error('start_at')
+                        <p class="text-red-500 text-sm">{{ $message }}</p>
+                    @enderror
                 </fieldset>
 
                 <fieldset class="fieldset mt-4">
                     <legend class="fieldset-legend">Fecha fin(Opcional)</legend>
                     <input type="date" name="end_at" value="{{ old('end_at') }}" class="input w-full border border-gray-300" />
+                    @error('end_at')
+                        <p class="text-red-500 text-sm">{{ $message }}</p>
+                    @enderror
                 </fieldset>
 
                 <div class="mt-4 flex space-x-2">
@@ -55,6 +68,9 @@
                         <x-input type="radio" name="is_active" value="0"></x-input>
                         Inactivo
                     </label>
+                    @error('is_active')
+                        <p class="text-red-500 text-sm">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="card-actions justify-end mt-4">
