@@ -35,11 +35,11 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="covers">
                 @foreach ($covers as $cover)
-                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
+                    <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium cursor-move" data-id="{{ $cover->id }}">
                         <th scope="row" class="px-6 py-4 align-middle flex items-center justify-center whitespace-nowrap">
-                            <img src="{{ $cover->image }}" alt="{{ $cover->title }}" class="w-full h-24 aspect-[3/1] object-cover object-center rounded-md">
+                            <img src="{{ $cover->image }}" alt="{{ $cover->title }}" class="w-full h-24 aspect-[3/1] object-cover object-center rounded-l-md">
                         </th>
                         <td class="px-6 py-4">
                             <div>
@@ -88,6 +88,25 @@
 @endif
 
 @push('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.7/Sortable.min.js"></script>
+
+    <script>
+        new Sortable(covers, {
+            animation: 150,
+            ghostClass: 'bg-blue-100',
+            store: {
+                set: (sortable) => {
+                    const order = sortable.toArray();
+                    axios.post('{{ route('api.sort.covers') }}', {
+                        sorts: order
+                    }).catch((error) => {
+                        console.log('Ocurrio un error al ordenar las portadas ', error);
+                    });
+                }
+            }
+        });
+    </script>
+
     <script>
         function confirmDelete(event) {
             event.preventDefault();
