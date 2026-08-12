@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cover;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
@@ -13,7 +14,9 @@ class WelcomeController extends Controller
         //->where('end_at', '>=', now())
         ->orderBy('order')->get();
 
-        return view('welcome', compact('covers'));
+        $lastProducts = Product::orderBy('id', 'desc')->take(12)->get();
+
+        return view('welcome', compact('covers', 'lastProducts'));
     }
 
 
