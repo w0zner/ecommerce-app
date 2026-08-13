@@ -32,9 +32,11 @@
                                 @guest
                                     <div class="px-4 py-2">
                                         <div class="flex justify-center">
-                                            <a href="{{route('login')}}" class="btn w-full">Login</a>
+                                            <a href="{{route('login')}}" class="btn w-full">
+                                                <i class="fa-solid fa-right-to-bracket"></i>
+                                                Login</a>
                                         </div>
-                                        <p class="text-sm text-center text-white pt-3">
+                                        <p class="text-sm text-center pt-3">
                                             No tienes cuenta? <a href="{{route('register')}}" class="text-purpel-600 hover:underline">Registrate</a>
                                         </p>
                                     </div>

@@ -80,7 +80,7 @@
                     <x-label class="mb-1 block text-sm font-medium text-white">
                         Tipo
                     </x-label>
-                    <select data-theme="dark" class="bg-[#2b3440]  rounded-lg select select-md select-bordered w-full text-white" wire:model="newOption.type">
+                    <select class="bg-[#2b3440]  rounded-lg select select-md select-bordered w-full text-white" wire:model="newOption.type">
                         <option disabled selected value="">Elige una opcion</option>
                         <option value="1">Texto</option>
                         <option value="2">Color</option>

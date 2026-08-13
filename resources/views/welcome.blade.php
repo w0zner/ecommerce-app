@@ -35,9 +35,15 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             @foreach($lastProducts as $product)
-                <div class="bg-gray-100 p-4 rounded-md shadow-md overflow-hidden">
-                    <img src="{{ $product->image }}" alt="{{ $product->title }}" class="w-full aspect-[1/1] object-cover object-center">
-                </div>
+                <article class="bg-gray-100 p-2 rounded-md shadow-md overflow-hidden">
+                    <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-full rounded-md h-48 object-cover object-center">
+                    <div class="p-2">
+                        <h2 class="text-lg font-bold text-gray-700 line-clamp-2 min-h-[56px]">{{ $product->name }}</h2>
+                        <p class="text-gray-600">Gs. {{ $product->price }}</p>
+                        <p class="text-sm text-gray-500 line-clamp-2 mb-3">{{ $product->description }}</p>
+                        <a href="" class="btn btn-sm text-center btn-primary w-full text-white">Ver Detalle</a>
+                    </div>
+                </article>
             @endforeach
         </div>
     </x-container>
