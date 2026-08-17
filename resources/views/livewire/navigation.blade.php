@@ -89,7 +89,7 @@
                     <ul>
                         @foreach ($families as $family)
                             <li x-on:mouseover="openMenu=true" x-on:mouseout="openMenu=false" wire:mouseover="$set('family_id', {{ $family->id }})">
-                                <a href="" class="flex items-center justify-between px-4 py-4 text-gray-700 hover:bg-purple-200">
+                                <a href="{{route('families.show', $family)}}"  class="flex items-center justify-between px-4 py-4 text-gray-700 hover:bg-purple-200">
                                     {{ $family->name }}
                                     <i class="fa-solid fa-angle-right"></i>
                                 </a>
@@ -105,7 +105,7 @@
                             {{$this->familyName}}
                         </span>
 
-                        <a href="" class="btn">Ver todo</a>
+                        <a href="{{route('families.show', $family_id)}}"  class="btn">Ver todo</a>
                     </div>
                     <ul class="grid grid-cols-1 xl:grid-cols-3 gap-8">
                         @foreach ($this->categories as $cat)
