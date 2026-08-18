@@ -1,3 +1,5 @@
 <x-app-layout>
-    @livewire('filter', ['family_id' => $family->id])
+    <div class="mt-8">
+        @livewire('filter', ['family_id' => $family->id, 'options' => $options])
+    </div>
 </x-app-layout>
