@@ -182,7 +182,7 @@
                     </button>
                 <button class="btn btn-primary btn-sm" wire:click="save()">
                             <i class="fas fa-save"></i> Guardar
-                    </button>}
+                    </button>
                 </div>
         </x-slot>
     </x-dialog-modal>
