@@ -7,7 +7,7 @@
                     </button>
                     <h1 class="text-white">
                         <a href="/" class="inline-flex flex-col items-end">
-                            <span class="text-3xl leading-4 md:leading-6 font-semibold">Ecommerce</span>
+                            <span class="text-3xl leading-4 md:leading-6 font-semibold">{{ env('APP_NAME_ECOMMERCE', 'Ecommerce') }}</span>
                             <span class="text-xs">Tienda Online</span>
                         </a>
                     </h1>

@@ -19,6 +19,7 @@ class FamilyController extends Controller
                 });
             }
         ]) ->get();
+        //return $options;
 
         return view('families.show', compact('family', 'options'));
     }

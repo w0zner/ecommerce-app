@@ -28,7 +28,7 @@
           type="text"
           placeholder="username@site.com"
           class="input join-item" />
-        <button class="btn btn-primary join-item">Subscribe</button>
+        <button class="btn btn-secondary join-item">Subscribe</button>
       </div>
     </fieldset>
   </form>
