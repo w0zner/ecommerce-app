@@ -76,7 +76,7 @@
             <select wire:model.live="category_id" name="category_id" class="select input w-full border border-gray-300">
                 <option value="" disabled selected>Elige una categoría</option>
                 @foreach ($this->categories as $category)
-                    <option value="{{ $category->id }}" @selected($category->id == old('category_id'))>{{$category->name}}</option>
+                    <option value="{{ $category->id }}")>{{$category->name}}</option>
                 @endforeach
             </select>
             @error('category_id') 
@@ -90,7 +90,7 @@
             <select wire:model.live="productEdit.subcategory_id" name="category_id" class="select input w-full border border-gray-300">
                 <option value="" disabled selected>Elige una subcategoría</option>
                 @foreach ($this->subcategories as $category)
-                    <option value="{{ $category->id }}" @selected($category->id == old('category_id'))>{{$category->name}}</option>
+                    <option value="{{ $category->id }}">{{$category->name}}</option>
                 @endforeach
             </select>
             @error('productEdit.subcategory_id') 

@@ -29,6 +29,8 @@ class ProductEdit extends Component
         'image_path' => '',
         'price' => '',
         'stock'=> '',
+        'family_id' => '',
+        'category_id' => '',
         'subcategory_id' => '',
     ];
 
@@ -67,8 +69,21 @@ class ProductEdit extends Component
         $this->product=$this->product->fresh();
     }
 
+    // Al cambiar de Familia -> resetea categoría y subcategoría
+    public function updatedFamilyId($value)
+    {
+        $this->category_id = '';
+        $this->productEdit['subcategory_id'] = '';
+    }
+
+    // Al cambiar de Categoría -> resetea la subcategoría
+    public function updatedCategoryId($value)
+    {
+        $this->productEdit['subcategory_id'] = '';
+    }
+
     public function save() {
-        //dd(json_encode($this->product)  . $this->family_id . ','. $this->category_id .','. $this->subcategory_id);
+        //dd(json_encode($this->product)  . $this->family_id . ','. $this->category_id);
         $this->validate([
             'image' => 'nullable|image|max:1024',
             'productEdit.image_path' => 'required|string|max:255',
@@ -97,6 +112,9 @@ class ProductEdit extends Component
                 Storage::disk('public')->delete($this->product->image_path);
             }
         }
+
+        $this->productEdit['family_id'] = $this->family_id;
+        $this->productEdit['category_id'] = $this->category_id;
 
         $this->product->update($this->productEdit);
 

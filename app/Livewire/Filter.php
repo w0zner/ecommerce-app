@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Option;
+use App\Models\Product;
 use Livewire\Component;
 
 class Filter extends Component
@@ -11,7 +12,7 @@ class Filter extends Component
     public $options;
 
     public function mount() {
-       /* $this->options = Option::whereHas('products.subcategory.category', function($query) {
+        $this->options = Option::whereHas('products.subcategory.category', function($query) {
             $query->where('family_id', $this->family_id);
         })
         ->with([
@@ -20,12 +21,16 @@ class Filter extends Component
                     $query->where('family_id', $this->family_id);
                 });
             }
-        ]) ->get(); */
+        ]) ->get(); 
          $this->options->load('features');
     }
 
     public function render()
     {
-        return view('livewire.filter');
+        $products = Product::whereHas('subcategory.category', function($query) {
+            $query->where('family_id', $this->family_id);
+        })->paginate(12);
+
+        return view('livewire.filter', compact('products'));
     }
 }

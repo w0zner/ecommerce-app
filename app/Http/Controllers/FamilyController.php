@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class FamilyController extends Controller
 {
     public function show(Family $family) {
-        $options = Option::whereHas('products.subcategory.category', function($query) use ($family) {
+        /*$options = Option::whereHas('products.subcategory.category', function($query) use ($family) {
             $query->where('family_id', $family->id);
         })
         ->with([
@@ -18,9 +18,9 @@ class FamilyController extends Controller
                     $query->where('family_id', $family->id);
                 });
             }
-        ]) ->get();
+        ]) ->get();*/
         //return $options;
 
-        return view('families.show', compact('family', 'options'));
+        return view('families.show', compact('family'));
     }
 }
