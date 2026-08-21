@@ -1,7 +1,7 @@
-<div class="bg-white py-12">
+<div class="bg-white py-8">
     <x-container class="px-4 md:flex">
         @if($options->count() > 0)
-            <aside class="md:w-52 md:flex-shrink-0 md:mr-8">
+            <aside class="md:w-52 md:flex-shrink-0 md:mr-8 mb-8 md:mb-0">
                 <ul class="space-y-4">
                     @foreach($options as $option)
                         <li class="mb-2" x-data="{ isOpen: true }">
