@@ -1,7 +1,7 @@
 <div class="bg-white py-12">
-    <x-container class="px-4 flex">
+    <x-container class="px-4 md:flex">
         @if($options->count() > 0)
-            <aside class="w-52 flex-shrink-0 mr-2">
+            <aside class="md:w-52 md:flex-shrink-0 md:mr-8">
                 <ul class="space-y-4">
                     @foreach($options as $option)
                         <li class="mb-2" x-data="{ isOpen: true }">
@@ -25,8 +25,8 @@
                 </ul>
             </aside>
         @endif
-        
-        <div class="flex-1 ml-6">
+
+        <div class="md:flex-1">
             @if($products->count() > 0)
                 <div class="mb-5">
                     <span>Ordenar por:</span>
@@ -37,7 +37,7 @@
                         <option value="price_desc">Precio: Mayor a Menor</option>
                     </select>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     @foreach($products as $product)
                         <article class="bg-gray-100 p-2 rounded-md shadow-md overflow-hidden">
                             <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-full rounded-md h-48 object-cover object-center">
@@ -58,7 +58,7 @@
                     <h2>No hay productos disponibles para esta sección.</h2>
                 </div>
             @endif
-            
+
 
         </div>
     </x-container>
