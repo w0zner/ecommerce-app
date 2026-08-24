@@ -11,18 +11,26 @@
                                 x-bind:class="{'rotate-180': isOpen}"></i>
                             </button>
                             <ul class="mt-2 space-y-2" x-show="isOpen">
-                                @foreach($option->features as $feature)
-                                    <li>
-                                        <label class="flex items-center">
-                                            <x-checkbox class="mr-2"></x-checkbox>
-                                            {{ $feature->description }}
-                                        </label>
-                                    </li>
-                                @endforeach
+                                @if($option->features->count() > 0)
+                                    @foreach($option->features as $feature)
+                                        <li>
+                                            <label class="flex items-center">
+                                                <x-checkbox
+                                                value="{{ $feature->id }}"
+                                                wire:model.live="selected_features"
+                                                class="mr-2"></x-checkbox>
+                                                {{ $feature->description }}
+                                            </label>
+                                        </li>
+                                    @endforeach
+                                @else
+                                    <span class="text-gray-500 text-sm ml-5">Aún sin características</span>
+                                @endif
                             </ul>
                         </li>
                     @endforeach
                 </ul>
+
             </aside>
         @endif
 
@@ -30,7 +38,7 @@
             @if($products->count() > 0)
                 <div class="mb-5">
                     <span>Ordenar por:</span>
-                    <select class="select">
+                    <select class="select" wire:model.live="orderBy">
                         <option disabled selected>Selecciona una opción</option>
                         <option value="relevance">Relevancia</option>
                         <option value="price">Precio: Menor a Mayor</option>
