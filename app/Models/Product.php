@@ -25,7 +25,7 @@ class Product extends Model
             get: fn() => Storage::url($this->image_path)
         );
     }
-    
+
     public function subcategory() {
          return $this->belongsTo(Subcategory::class);
     }
@@ -40,4 +40,28 @@ class Product extends Model
             ->withPivot('features')
             ->withTimestamps();
     }
+
+    public function scopeVerifyFamily($query, $family_id) {
+        $query->when($family_id, function($query) use ($family_id) {
+            $query->whereHas('subcategory.category', function($query) use ($family_id) {
+                $query->where('family_id', $family_id);
+            });
+        });
+    }
+
+    public function scopeVerifyCategory($query, $category_id) {
+        $query->when($category_id, function($query) use($category_id) {
+            $query->whereHas('subcategory', function($query) use($category_id){
+                $query->where('category_id', $category_id);
+            });
+        });
+    }
+
+    public function scopeVerifySubcategory($query, $subcategory_id) {
+        $query->when($subcategory_id, function($query) use($subcategory_id) {
+                $query->where('subcategory_id', $subcategory_id);
+        });
+    }
+
+
 }
