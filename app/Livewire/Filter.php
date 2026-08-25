@@ -50,7 +50,7 @@ class Filter extends Component
 
     public function render()
     {
-
+        //Consultas con query scopes
         $options = Option::verifyFamily($this->family_id)
         ->verifyCategory($this->category_id)
         ->verifySubcategory($this->subcategory_id)
@@ -60,23 +60,9 @@ class Filter extends Component
         $products = Product::verifyFamily($this->family_id)
         ->verifyCategory($this->category_id)
         ->verifySubcategory($this->subcategory_id)
-        ->when($this->orderBy=="relevance", function($query) {
-            $query->orderBy("created_at", "desc");
-        })
-        ->when($this->orderBy=="price", function($query) {
-            $query->orderBy("price", "asc");
-        })
-        ->when($this->orderBy=="price_desc", function($query) {
-            $query->orderBy("price", "desc");
-        })
-        ->when($this->searchOnEvent, function($query) {
-            $query->where('name', 'like', '%' . $this->searchOnEvent . '%');
-        })
-        ->when($this->selected_features, function($query) {
-            $query->whereHas('variants.features', function($query) {
-                $query->whereIn('features.id', $this->selected_features);
-            });
-        })
+        ->verifyOrder($this->orderBy)
+        ->verifySearch($this->searchOnEvent)
+        ->verifyFeatures($this->selected_features)
         ->paginate(12);
 
         //dd($options, $products);

@@ -41,7 +41,7 @@
                         <h2 class="text-lg font-bold text-gray-700 line-clamp-2 min-h-[56px]">{{ $product->name }}</h2>
                         <p class="text-gray-600">Gs. {{ $product->price }}</p>
                         <p class="text-sm text-gray-500 line-clamp-2 mb-3">{{ $product->description }}</p>
-                        <a href="" class="btn btn-sm text-center btn-primary w-full text-white">Ver Detalle</a>
+                        <a href="{{ route('products.show', $product) }}" class="btn btn-sm text-center btn-primary w-full text-white">Ver Detalle</a>
                     </div>
                 </article>
             @endforeach

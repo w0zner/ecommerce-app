@@ -63,5 +63,31 @@ class Product extends Model
         });
     }
 
+    public function scopeVerifyOrder($query, $orderBy) {
+        $query->when($orderBy=="relevance", function($query) {
+            $query->orderBy("created_at", "desc");
+        })
+        ->when($orderBy=="price", function($query) {
+            $query->orderBy("price", "asc");
+        })
+        ->when($orderBy=="price_desc", function($query) {
+            $query->orderBy("price", "desc");
+        });
+    }
+
+    public function scopeVerifySearch($query, $searchOnEvent) {
+        $query->when($searchOnEvent, function($query) use($searchOnEvent) {
+            $query->where('name', 'like', '%' . $searchOnEvent . '%');
+        });
+    }
+
+    public function scopeVerifyFeatures($query, $selected_features) {
+        $query->when($selected_features, function($query) use($selected_features) {
+            $query->whereHas('variants.features', function($query) use($selected_features) {
+                $query->whereIn('features.id', $selected_features);
+            });
+        });
+    }
+
 
 }
