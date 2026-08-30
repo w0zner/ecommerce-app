@@ -11,7 +11,7 @@
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
-            @foreach($covers as $cover) 
+            @foreach($covers as $cover)
                 <div class="swiper-slide">
                     <img src="{{ $cover->image }}" alt="{{ $cover->title }}" class="w-full aspect-[5/1] object-cover object-center">
                 </div>
@@ -39,7 +39,7 @@
                     <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-full rounded-md h-48 object-cover object-center">
                     <div class="p-2">
                         <h2 class="text-lg font-bold text-gray-700 line-clamp-2 min-h-[56px]">{{ $product->name }}</h2>
-                        <p class="text-gray-600">Gs. {{ $product->price }}</p>
+                        <p class="text-gray-600 font-semibold">Gs. {{ number_format($product->price, 0, ',', '.') }}</p>
                         <p class="text-sm text-gray-500 line-clamp-2 mb-3">{{ $product->description }}</p>
                         <a href="{{ route('products.show', $product) }}" class="btn btn-sm text-center btn-primary w-full text-white">Ver Detalle</a>
                     </div>
