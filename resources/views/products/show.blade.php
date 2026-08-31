@@ -9,6 +9,9 @@
         </ul>
         </div>
     </x-container>
+
+    @livewire('products.add-to-cart', ['product' => $product])
+
     <x-container>
         <div class="card">
             <div class="grid md:grid-cols-2 gap-6">
