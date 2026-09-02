@@ -25,10 +25,10 @@
                         Gs. {{ number_format($product->price, 0, ',', '.') }}
                     </p>
 
-                    <div class="flex items-center space-x-6 mb-6">
-                        <button class="btn btn-secondary btn-sm rounded-md"><i class="fa-solid fa-minus"></i></button>
-                        <span class="font-semibold">1</span>
-                        <button class="btn btn-secondary btn-sm rounded-md"><i class="fa-solid fa-plus"></i></button>
+                    <div class="flex items-center space-x-6 mb-6" x-data="{qty: @entangle('qty')}">
+                        <button class="btn btn-secondary btn-sm rounded-md" x-on:click="qty= qty-1" x-bind:disabled="qty==1"><i class="fa-solid fa-minus"></i></button>
+                        <span class="font-semibold" x-text="qty" class="inline-block w-3 text-center"></span>
+                        <button class="btn btn-secondary btn-sm rounded-md" x-on:click="qty= qty+1"><i class="fa-solid fa-plus"></i></button>
                     </div>
                     <button class="btn btn-sm bg-purple-500 text-white rounded-md w-full mb-5 hover:text-purple-500">
                         <i class="fa-solid fa-basket-shopping"></i> Agregar al carrito
