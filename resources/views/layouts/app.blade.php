@@ -51,10 +51,10 @@
         @endif
 
         <script>
-        Livewire.on('swal', data => {
-            Swal.fire(data[0] ?? data);
-        });
-    </script>
+            Livewire.on('swal', data => {
+                Swal.fire(data[0] ?? data);
+            });
+        </script>
 
     </body>
 </html>
