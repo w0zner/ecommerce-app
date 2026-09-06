@@ -40,6 +40,21 @@
 
         @livewireScripts
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         @stack('js')
+
+        @if (session('swal'))
+            <script>
+                Swal.fire({!! json_encode(session('swal')) !!});
+            </script>
+        @endif
+
+        <script>
+        Livewire.on('swal', data => {
+            Swal.fire(data[0] ?? data);
+        });
+    </script>
+
     </body>
 </html>

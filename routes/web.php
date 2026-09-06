@@ -7,9 +7,22 @@ use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\Product;
 use App\Models\Variant;
+use Binafy\LaravelCart\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
+
+Route::get('/cart', function (){
+$userId = Auth::user()->id;
+    //$cart = Cart::query()->firstOrCreate(['user_id' => $userId]);
+    $cart = Cart::query()
+            ->where('user_id', $userId)
+            ->first();
+    $cartItems = $cart->items()->with('itemable')->get();
+    //$cartItems = $cart->items()->get();
+    return $cart;
+});
 
 Route::get('families/{family}', [FamilyController::class, 'show'])->name('families.show');
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');

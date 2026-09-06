@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Binafy\LaravelCart\Cartable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-class Product extends Model
+class Product extends Model implements Cartable
 {
     use HasFactory;
     protected $fillable = [
@@ -19,6 +20,11 @@ class Product extends Model
         'stock',
         'subcategory_id'
     ];
+
+    public function getPrice(): float {
+        return (float) $this->price;
+    }
+
 
     protected function image(): Attribute {
         return Attribute::make(
