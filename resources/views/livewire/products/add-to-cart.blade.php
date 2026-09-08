@@ -3,11 +3,9 @@
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="col-span-1">
                     <figure class="mb-2">
-                        <img src="{{$product->image}}" alt="{{$product->name}}" class="rounded-md aspect-[16/9] w-full object-cover object-center shadow-slate-500">
+                        <img src="{{$product->image}}" alt="{{$product->name}}" class="rounded-md aspect-[1/1] w-full object-cover object-center shadow-slate-500">
                     </figure>
-                    <div class="text-sm text-gray-700">
-                        {{$product->description}}
-                    </div>
+
                 </div>
                 <div class="col-span-1">
                     <h1 class="text-xl text-gray-700 mb-2">{{$product->name}}</h1>
@@ -36,6 +34,9 @@
                     <button wire:click="eliminar()">
                         ELiminar
                     </button>
+                    <div class="text-sm text-gray-700 mb-4">
+                        {{$product->description}}
+                    </div>
                     <div class="flex items-center space-x-3 text-gray-700">
                         <i class="fa-solid fa-truck-fast text-2xl"></i>
                         <p>Envios a todo el país</p>
