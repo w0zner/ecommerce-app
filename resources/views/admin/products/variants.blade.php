@@ -21,7 +21,7 @@
         @method('PUT')
         <div class="relative mb-6">
             <figure>
-                <img class="aspect-[16/9] w-full object-cover object-center" id="imgPreview" src="{{$variant->image}}" alt="">
+                <img class="aspect-[1/1] w-full object-cover object-center" id="imgPreview" src="{{$variant->image}}" alt="">
             </figure>
             <div class="absolute top-8 right-8 bg-gray-200 p-3 rounded-md cursor-pointer shadow-lg">
                 <label class="cursor-pointer">
@@ -29,7 +29,7 @@
                     Actualizar imagen
                     <input type="file" name="image" class="hidden" accept="image/*" onchange="previewImage(event, '#imgPreview')">
                 </label>
-        </div>
+            </div>
 
         <div class="card shadow-sm bg-base-100">
             <div class="mb-4">

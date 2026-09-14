@@ -2,22 +2,32 @@
 
 namespace App\Livewire\Products;
 
+use App\Models\Feature;
 use App\Models\Product;
-use Livewire\Component;
-use Binafy\LaravelCart\LaravelCart;
 use Binafy\LaravelCart\Models\Cart;
 use Binafy\LaravelCart\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
 
-class AddToCart extends Component
+class AddToCartVariants extends Component
 {
     public $product;
     public $qty=1;
+    public $selected_features = [];
 
-    public function eliminar() {
-                $user=Auth::user();
+    public function mount() {
+        foreach($this->product->options as $option) {
+            $features=collect($option->pivot->features);
+            $this->selected_features[$option->id]=$features->first()['id'];
+        }
+    }
 
-        LaravelCart::emptyCart($user->id);
+    #[Computed()]
+    public function variant() {
+        return $this->product->variants->load('features')->filter(function($variant) {
+            return !array_diff($variant->features->pluck('id')->toArray(), $this->selected_features);
+        })->first();
     }
 
     public function add_to_cart() {
@@ -53,8 +63,9 @@ class AddToCart extends Component
                 'itemable_type' => Product::class,
                 'quantity' => $this->qty,
                 'options'       => json_encode([
-                    'image' => $this->product->image,
-                    'sku'        => $this->product->sku,
+                    'image' => $this->variant->image,
+                    'sku'        => $this->variant->sku,
+                    'features'   => Feature::whereIn('id', $this->selected_features)->pluck('description', 'id')->toArray(),
                 ]),
             ]);
             $cart->items()->save($cartItem);
@@ -69,7 +80,6 @@ class AddToCart extends Component
 
     public function render()
     {
-        return view('livewire.products.add-to-cart');
+        return view('livewire.products.add-to-cart-variants');
     }
-
 }
