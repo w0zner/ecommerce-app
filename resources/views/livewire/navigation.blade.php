@@ -57,8 +57,14 @@
                             </x-slot>
                         </x-dropdown>
 
-                        <button class="text-2xl btn btn-ghost">
-                            <i class="fas fa-shopping-cart text-white"></i>
+                        <button class="text-2xl btn btn-ghost relative">
+                                                        <i class="fas fa-shopping-cart text-white"></i>
+
+                            @auth
+                                <div class="absolute -top-2 -end-0 inline-flex items-center justify-center w-6 h-6 badge badge-error badge-lg text-white">
+                                    {{ $cartCount }}
+                                </div>
+                            @endauth
                         </button>
                     </div>
                 </div>

@@ -59,7 +59,8 @@ class AddToCart extends Component
             ]);
             $cart->items()->save($cartItem);
         }
-
+        //$this->dispatch('refreshCart');
+        $this->dispatch('refreshCartCount');
         $this->dispatch('swal', [
             'title' => 'Bien hecho!',
             'icon' => 'success',

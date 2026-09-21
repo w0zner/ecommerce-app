@@ -19,9 +19,9 @@ $userId = Auth::user()->id;
     $cart = Cart::query()
             ->where('user_id', $userId)
             ->first();
-    $cartItems = $cart->items()->with('itemable')->get();
+    //$cartItems = $cart->items()->with('itemable')->get();
     //$cartItems = $cart->items()->get();
-    return $cart;
+    return $cart ?? "No tiene productos en su carrito";
 });
 
 Route::get('families/{family}', [FamilyController::class, 'show'])->name('families.show');

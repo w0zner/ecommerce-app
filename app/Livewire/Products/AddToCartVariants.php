@@ -70,7 +70,7 @@ class AddToCartVariants extends Component
             ]);
             $cart->items()->save($cartItem);
         }
-
+        $this->dispatch('refreshCartCount');
         $this->dispatch('swal', [
             'title' => 'Bien hecho!',
             'icon' => 'success',
