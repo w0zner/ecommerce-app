@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\ProductController;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 
-Route::get('/cart', function (){
+Route::get('/cartest', function (){
 $userId = Auth::user()->id;
     //$cart = Cart::query()->firstOrCreate(['user_id' => $userId]);
     $cart = Cart::query()
@@ -23,6 +24,8 @@ $userId = Auth::user()->id;
     //$cartItems = $cart->items()->get();
     return $cart ?? "No tiene productos en su carrito";
 });
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 Route::get('families/{family}', [FamilyController::class, 'show'])->name('families.show');
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
