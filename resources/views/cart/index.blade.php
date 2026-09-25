@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-container class="mt-12 px-4">
         @if($cartItems->count() > 0)
-            {{$cartItems}}
+            {{-- {{$cartItems}} --}}
             @livewire('shopping-cart', ['cartItems' => $cartItems])
         @else
             <div role="alert" class="alert alert-vertical sm:alert-horizontal">
