@@ -20,14 +20,6 @@ class Navigation extends Component
     public function mount() {
         $this->families = Family::all();
         $this->family_id = $this->families->first()->id;
-
-        if(Auth::check()) {
-            $this->cart = Cart::query()
-            ->where('user_id', Auth::user()->id)
-            ->first();
-
-            $this->cartCount = $this->cart ? $this->cart->items()->sum('quantity') : 0;
-        }
     }
 
     #[Computed()]
@@ -46,11 +38,19 @@ class Navigation extends Component
     //para actualizar la cantidad de productos en el carrito
     #[On('refreshCartCount')]
     public function refreshCartCount() {
-        $this->cartCount = $this->cart->items()->sum('quantity') ?? 0;
+        $this->cartCount = $this->cart ? $this->cart->items()->sum('quantity') : 0;
     }
 
     public function render()
     {
+        if(Auth::check()) {
+            $this->cart = Cart::query()
+            ->where('user_id', Auth::user()->id)
+            ->first();
+
+            $this->cartCount = $this->cart ? $this->cart->items()->sum('quantity') : 0;
+        }
+
         return view('livewire.navigation');
     }
 }

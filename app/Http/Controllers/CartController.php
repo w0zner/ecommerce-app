@@ -19,7 +19,10 @@ class CartController extends Controller
             ->where('user_id', $user->id)
             ->first();
 
-        $cartItems = $cart->items()->with('itemable')->get();
+        $cartItems=[];
+        if($cart) {
+            $cartItems = $cart->items()->with('itemable')->get();
+        }
 
         return view('cart.index', compact('cartItems'));
     }

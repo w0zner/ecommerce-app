@@ -8,7 +8,7 @@
         </div>
     </x-container>
     <x-container class="mt-12 px-4">
-        @if($cartItems->count() > 0)
+        @if(count($cartItems) > 0)
             {{-- {{$cartItems}} --}}
             @livewire('shopping-cart', ['cartItems' => $cartItems])
         @else

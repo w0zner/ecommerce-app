@@ -21,7 +21,7 @@
                                         {{$item->itemable->name}}
                                     </a>
                                 </p>
-                                <button class="btn btn-xs btn-outline btn-error text-white rounded-md">
+                                <button class="btn btn-xs btn-outline btn-error text-white rounded-md" wire:click="removeItem({{ $item->id }})">
                                     <i class="fa-solid fa-xmark"></i>
                                     Quitar
                                 </button>
