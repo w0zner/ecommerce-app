@@ -1,4 +1,12 @@
 <x-app-layout>
+    <x-container class="px-4 my-4">
+        <div class="breadcrumbs text-sm">
+        <ul>
+            <li><a href="{{ route('welcome.index') }}">Home</a></li>
+            <li><span class="text-gray-600 cursor-pointer">Carrito de compras</span></li>
+        </ul>
+        </div>
+    </x-container>
     <x-container class="mt-12 px-4">
         @if($cartItems->count() > 0)
             {{-- {{$cartItems}} --}}
@@ -10,7 +18,7 @@
                 </svg>
                 <span>No tiene productos en su carrito de compras!</span>
                 <div>
-                    <a role="button" class="btn btn-sm btn-primary" href="{{route('welcome.index')}}">Volver a la tienda</a>
+                    <a role="button" class="btn btn-primary text-white" href="{{route('welcome.index')}}">Volver a la tienda</a>
                 </div>
             </div>
         @endif

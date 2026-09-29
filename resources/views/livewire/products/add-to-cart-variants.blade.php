@@ -57,9 +57,6 @@
                     <button class="btn btn-sm bg-purple-500 text-white rounded-md w-full mb-5 hover:text-purple-500" wire:click="add_to_cart()" wire:loading.attr="disabled">
                         <i class="fa-solid fa-basket-shopping"></i> Agregar al carrito
                     </button>
-                    <button wire:click="eliminar()">
-                        ELiminar
-                    </button>
                     <div class="text-sm text-gray-700 mb-4">
                         {{$product->description}}
                     </div>

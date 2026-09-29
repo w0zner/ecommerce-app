@@ -4,7 +4,7 @@
             <div class="flex justify-between mb-2">
                 <h2 class="text-2xl font-bold">Carrito de compras ({{$cartItems->count()}} Productos)</h2>
 
-                <button class="btn btn-error text-white rounded-md">
+                <button class="btn btn-sm btn-outline btn-error rounded-md hover:text-white" wire:click="limpiarCarrito()">
                     <i class="fas fa-trash"></i>
                     Limpiar Carrito
                 </button>
@@ -21,7 +21,7 @@
                                         {{$item->itemable->name}}
                                     </a>
                                 </p>
-                                <button class="btn btn-xs btn-error text-white rounded-md shadow-md">
+                                <button class="btn btn-xs btn-outline btn-error text-white rounded-md">
                                     <i class="fa-solid fa-xmark"></i>
                                     Quitar
                                 </button>
@@ -43,12 +43,13 @@
             </div>
         </div>
         <div class="lg:col-span-2 lg:pt-5">
-            <div class="card bg-base-100 shadow-sm p-4 lg:mt-8">
+            <div class="card bg-base-100 shadow-sm p-4 lg:mt-5">
                 <div class="flex justify-between items-center p-between mb-3">
                     <p class="text-lg font-bold">Total</p>
                     <p class="text-lg font-bold">Gs. {{ number_format($totalPrice, 0, ',', '.') }}</p>
                 </div>
-                <a class="btn bg-purple-600 hover:bg-purple-700 text-white btn-block rounded-md">
+                <a class="btn bg-purple-600 hover:bg-purple-700 text-white btn-block rounded-md shadow-md">
+                    <i class="fa-solid fa-cart-shopping"></i>
                     Continuar compra
                 </a>
             </div>

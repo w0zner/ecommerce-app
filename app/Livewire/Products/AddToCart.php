@@ -14,12 +14,6 @@ class AddToCart extends Component
     public $product;
     public $qty=1;
 
-    public function eliminar() {
-                $user=Auth::user();
-
-        LaravelCart::emptyCart($user->id);
-    }
-
     public function add_to_cart() {
         //Verifico que el usuario esté autenticado
         if(!Auth::check()){
