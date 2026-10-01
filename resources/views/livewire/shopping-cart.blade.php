@@ -32,9 +32,9 @@
                             </p>
 
                             <div class="ml-auto space-x-3">
-                                <button class="btn btn-secondary btn-sm rounded-md shadow-md" ><i class="fa-solid fa-minus"></i></button>
+                                <button class="btn btn-secondary btn-sm rounded-md shadow-md" wire:click="decreaseQuantity({{ $item->id }})"><i class="fa-solid fa-minus"></i></button>
                                 <span class="font-semibold inline-block w-3 text-center">{{$item->quantity}}</span>
-                                <button class="btn btn-secondary btn-sm rounded-md shadow-md"><i class="fa-solid fa-plus"></i></button>
+                                <button class="btn btn-secondary btn-sm rounded-md shadow-md" wire:click="increaseQuantity({{ $item->id }})"><i class="fa-solid fa-plus"></i></button>
                             </div>
                         </li>
 

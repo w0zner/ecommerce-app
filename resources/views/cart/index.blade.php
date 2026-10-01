@@ -10,7 +10,7 @@
     <x-container class="mt-12 px-4">
         @if(count($cartItems) > 0)
             {{-- {{$cartItems}} --}}
-            @livewire('shopping-cart', ['cartItems' => $cartItems])
+            @livewire('shopping-cart', ['cart' => $cart])
         @else
             <div role="alert" class="alert alert-vertical sm:alert-horizontal">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current text-info h-6 w-6 shrink-0">

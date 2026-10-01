@@ -24,6 +24,6 @@ class CartController extends Controller
             $cartItems = $cart->items()->with('itemable')->get();
         }
 
-        return view('cart.index', compact('cartItems'));
+        return view('cart.index', compact('cart', 'cartItems'));
     }
 }

@@ -10,13 +10,24 @@ use Livewire\Component;
 
 class ShoppingCart extends Component
 {
+    public $cart;
     public $cartItems;
     public $totalPrice;
 
-    public function mount() {
-        $this->totalPrice = $this->cartItems->sum(function($item){
-            return $item['itemable']['price'] * $item['quantity'];
-        });
+    public function mount() {}
+
+    public function obtenerItems() {
+        if($this->cart) {
+            $this->cartItems = $this->cart->items()->with('itemable')->get();
+        }
+
+        if(count($this->cartItems) > 0) {
+            $this->totalPrice = $this->cartItems->sum(function($item){
+                return $item['itemable']['price'] * $item['quantity'];
+            });
+        } else {
+            $this->totalPrice = 0;
+        }
     }
 
     public function limpiarCarrito() {
@@ -24,32 +35,41 @@ class ShoppingCart extends Component
 
         LaravelCart::emptyCart($user->id);
         $this->dispatch('refreshCartCount');
-
         return redirect()->route('cart.index');
     }
 
+    public function decreaseQuantity($itemId) {
+        $cartItem = CartItem::query()->where('id', $itemId)->firstOrFail();
+        if($cartItem) {
+            if($cartItem->quantity > 1) {
+                $cartItem->quantity--;
+                $cartItem->save();
+            } else {
+                $this->removeItem($itemId);
+            }
+        }
+        //dd($this->cartItems);
+        $this->dispatch('refreshCartCount');
+    }
+
+        public function increaseQuantity($itemId) {
+        $cartItem = CartItem::query()->where('id', $itemId)->firstOrFail();
+        if($cartItem) {
+            //if($cartItem->quantity < 9) {
+                $cartItem->quantity++;
+                $cartItem->save();
+            //} else {
+               // $this->removeItem($itemId);
+            //}
+        }
+
+        $this->dispatch('refreshCartCount');
+    }
+
     public function removeItem($itemId) {
-         $user=Auth::user();
-         //LaravelCart::removeItem($itemId);
-
-         //$deleted = CartItem::query()->where('id', $itemId)
-
-         $cart = Cart::query()
-          ->where('user_id', $user->id)
-            ->first();
-
-        $deleted = $cart->items()->where('id', $itemId)->delete();
-             //($cartItems);
+         $deleted = CartItem::query()->where('id', $itemId)->delete();
 
         if($deleted){
-           /*  session()->flash('swal', [
-                'position'=> 'top-end',
-                'icon' => 'error',
-                'title'=> 'Producto eliminado.',
-                'showConfirmButton'=> false,
-                'timer' => 1500
-            ]); */
-
             return redirect()->route('cart.index');
         }
 
@@ -58,6 +78,7 @@ class ShoppingCart extends Component
 
     public function render()
     {
+        $this->obtenerItems();
         return view('livewire.shopping-cart');
     }
 }
