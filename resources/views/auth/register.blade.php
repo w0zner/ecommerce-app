@@ -38,8 +38,8 @@
                     <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
                 </div>
                 <div>
-                    <x-label for="telephone" value="Celular" />
-                    <x-input id="telephone" class="block mt-1 w-full" type="text" name="telephone" :value="old('telephone')" required />
+                    <x-label for="phone" value="Celular" />
+                    <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required />
                 </div>
 
                 <div>

@@ -29,7 +29,7 @@
     </div>
 
     <x-container>
-        <h1 class="text-2xl font-bold text-gray-700 mb-4">
+        <h1 class="text-2xl font-bold text-gray-700 mt-4 mb-4">
             Ultimos Productos
         </h1>
 
