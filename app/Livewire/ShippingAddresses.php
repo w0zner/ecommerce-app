@@ -9,6 +9,7 @@ use Livewire\Component;
 class ShippingAddresses extends Component
 {
     public $addresses;
+    public $showForm = false;
 
     public function mount() {
         if(!Auth::check()) {

@@ -4,19 +4,28 @@
             <h2 class="text-white font-bold text-lg">Direcciones de envío guardadas</h2>
         </header>
         <div class="p-4">
-            @if (count($addresses) > 0)
-                
+            @if ($showForm)
+
             @else
-                <div role="alert" class="alert alert-vertical sm:alert-horizontal bg-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current text-info h-6 w-6 shrink-0">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <span>No tiene direcciones registradas!</span>
-                    <div>
-                        <a role="button" class="btn btn-primary text-white" href="{{route('welcome.index')}}">Volver a la tienda</a>
+                 @if (count($addresses) > 0)
+
+                @else
+                    <div role="alert" class="alert alert-vertical sm:alert-horizontal bg-white">
+                        {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current text-info h-6 w-6 shrink-0">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg> --}}
+                        <span>No tiene direcciones registradas!</span>
+                        {{-- <div>
+                            <a role="button" class="btn btn-primary text-white" href="{{route('welcome.index')}}">Volver a la tienda</a>
+                        </div> --}}
                     </div>
-                </div>
+                    <button class="btn btn-outline btn-primary text-white w-full mt-2" wire:click="set('showForm', true)">
+                        Agregar
+                        <i class="fas fa-plus"></i>
+                    </button>
+                @endif
             @endif
+
         </div>
     </section>
 </div>
