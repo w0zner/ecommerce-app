@@ -28,19 +28,83 @@
                     </div>
                 </div>
                 <hr class="my-4" />
-                <div>
+                <div x-data="{
+                    receiver: @entangle('createAddress.receiver'),
+                    receiver_info: @entangle('createAddress.receiver_info')
+                }"
+                x-init="$watch('receiver', value => {
+                    if(value==1) {
+                        receiver_info.name= '{{ Auth::user()->name }}';
+                        receiver_info.last_name='{{ Auth::user()->last_name }}';
+                        receiver_info.document_type='{{ Auth::user()->document_type }}';
+                        receiver_info.document_number='{{ Auth::user()->document_number }}';
+                        receiver_info.phone='{{ Auth::user()->phone }}';
+                    } else {
+                        receiver_info.name='';
+                        receiver_info.last_name='';
+                        receiver_info.document_number='';
+                        receiver_info.phone='';
+                    }
+                })"
+                >
                     <p class="ml-1 mb-2 font-semibold">Quien recibira el pedido?</p>
                     <div class="flex items-center space-x-4">
                         <label class="mr-4">
-                            <input type="radio" name="recipient" value="1" wire:model="createAddress.receiver" />
+                            <input x-model="receiver" type="radio" name="recipient" value="1" wire:model="createAddress.receiver" />
                             <span class="ml-1">Sere Yo</span>
                         </label>
                         <label>
                             <input type="radio" name="recipient" value="2" wire:model="createAddress.receiver" />
-                            <span class="ml-1">Otra persona</span>
+                            <span x-model="receiver" class="ml-1">Otra persona</span>
                         </label>
                     </div>
                 </div>
+                <div class="grid grid-cols-4 gap-4" x-data="{
+                    receiver_info: @entangle('createAddress.receiver_info')
+                }">
+                    <div class="col-span-2">
+                        <label for="district">Nombres</label>
+                        <input type="text" x-model="receiver_info.name" placeholder="Nombres"  class="input w-full" />
+                    </div>
+                    <div class="col-span-2">
+                        <label for="reference">Apellidos</label>
+                        <input type="text" x-model="receiver_info.last_name" placeholder="Apellidos" class="input w-full" />
+                    </div>
+                    <div class="col-span-2">
+                        <label for="district">Número de documento</label>
+                        <div class="flex justify-between items-center gap-1">
+                            <div class="w-1/5">
+                                <select x-model="receiver_info.document_type" id="document_type" class="select selec-sm block mt-1 input w-full border bg-slate-100 border-gray-300" name="document_type" required>
+                                    @foreach (\App\Enums\TypeOfDocuments::cases() as $item)
+                                        <option value="{{$item->value}}">{{$item->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div  class="w-full">
+                                <input type="text" x-model="receiver_info.document_number" placeholder="Número de documento"  class="input w-full" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-span-2">
+                        <label for="reference">Teléfono</label>
+                        <input type="text" x-model="receiver_info.phone" placeholder="Teléfono"  class="input w-full" />
+                    </div>
+                </div>
+                <hr class="my-4" />
+                <div class="grid grid-cols-4 gap-4 mt-4">
+                    <div class="col-span-2">
+                    <button class="btn btn-outline btn-error w-full">
+                        Cancelar
+                    </button>
+                    </div>
+                    <div class="col-span-2">
+                    <button class="btn btn-primary w-full">
+                        Guardar
+                    </button>
+                </div>
+                </div>
+                
             @else
                  @if (count($addresses) > 0)
 

@@ -17,7 +17,17 @@ class ShippingAddresses extends Component
         if(!Auth::check()) {
             return redirect()->route('login');
         }
+        $user=Auth::user();
         $this->addresses= Address::where('user_id', Auth::user()->id)->get();
+
+        $this->createAddress->receiver_info=[
+            'name' => $user->name,
+            'last_name' => $user->last_nameme,
+            'document_type' => $user->document_type,
+            'document_number' => $user->document_number,
+            'phone' => $user->phone,
+        ];
+        //dd($this->createAddress->receiver_info);
     }
 
     public function render()
