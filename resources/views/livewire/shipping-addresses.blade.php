@@ -18,6 +18,28 @@
                         <label for="type">Nombre de dirección</label>
                         <input type="text" placeholder="Type here" class="input w-full" />
                     </div>
+                    <div class="col-span-2">
+                        <label for="district">Ciudad</label>
+                        <input type="text" placeholder="Ciudad" wire:model="createAddress.district" class="input w-full" />
+                    </div>
+                    <div class="col-span-2">
+                        <label for="reference">Referencia</label>
+                        <input type="text" placeholder="Referencia" wire:model="createAddress.reference" class="input w-full" />
+                    </div>
+                </div>
+                <hr class="my-4" />
+                <div>
+                    <p class="ml-1 mb-2 font-semibold">Quien recibira el pedido?</p>
+                    <div class="flex items-center space-x-4">
+                        <label class="mr-4">
+                            <input type="radio" name="recipient" value="1" wire:model="createAddress.receiver" />
+                            <span class="ml-1">Sere Yo</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="recipient" value="2" wire:model="createAddress.receiver" />
+                            <span class="ml-1">Otra persona</span>
+                        </label>
+                    </div>
                 </div>
             @else
                  @if (count($addresses) > 0)
