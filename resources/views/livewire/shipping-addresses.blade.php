@@ -60,41 +60,42 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-4 gap-4" x-data="{
+                    receiver: @entangle('createAddress.receiver'),
                     receiver_info: @entangle('createAddress.receiver_info')
                 }">
                     <div class="col-span-2">
                         <label for="district">Nombres</label>
-                        <input type="text" x-model="receiver_info.name" placeholder="Nombres"  class="input w-full" />
+                        <input type="text" :disabled="receiver==1" x-model="receiver_info.name" placeholder="Nombres"  class="input w-full" />
                     </div>
                     <div class="col-span-2">
                         <label for="reference">Apellidos</label>
-                        <input type="text" x-model="receiver_info.last_name" placeholder="Apellidos" class="input w-full" />
+                        <input type="text" :disabled="receiver==1" x-model="receiver_info.last_name" placeholder="Apellidos" class="input w-full" />
                     </div>
                     <div class="col-span-2">
                         <label for="district">Número de documento</label>
                         <div class="flex justify-between items-center gap-1">
                             <div class="w-1/5">
-                                <select x-model="receiver_info.document_type" id="document_type" class="select selec-sm block mt-1 input w-full border bg-slate-100 border-gray-300" name="document_type" required>
+                                <select :disabled="receiver==1" x-model="receiver_info.document_type" id="document_type" class="select selec-sm block mt-1 input w-full border bg-slate-100 border-gray-300" name="document_type" required>
                                     @foreach (\App\Enums\TypeOfDocuments::cases() as $item)
                                         <option value="{{$item->value}}">{{$item->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div  class="w-full">
-                                <input type="text" x-model="receiver_info.document_number" placeholder="Número de documento"  class="input w-full" />
+                                <input :disabled="receiver==1" type="text" x-model="receiver_info.document_number" placeholder="Número de documento"  class="input w-full" />
                             </div>
                         </div>
                         
                     </div>
                     <div class="col-span-2">
                         <label for="reference">Teléfono</label>
-                        <input type="text" x-model="receiver_info.phone" placeholder="Teléfono"  class="input w-full" />
+                        <input type="text"  x-model="receiver_info.phone" placeholder="Teléfono"  class="input w-full" />
                     </div>
                 </div>
                 <hr class="my-4" />
                 <div class="grid grid-cols-4 gap-4 mt-4">
                     <div class="col-span-2">
-                    <button class="btn btn-outline btn-error w-full">
+                    <button class="btn btn-outline btn-error w-full" wire:click="$set('showForm', false)">
                         Cancelar
                     </button>
                     </div>
@@ -109,7 +110,7 @@
                  @if (count($addresses) > 0)
 
                 @else
-                    <div role="alert" class="alert alert-vertical sm:alert-horizontal bg-white">
+                    <div role="alert" class="alert alert-vertical border-0 sm:alert-horizontal bg-white items-center">
                         {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current text-info h-6 w-6 shrink-0">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg> --}}

@@ -10,7 +10,7 @@ use Livewire\Component;
 class ShippingAddresses extends Component
 {
     public $addresses;
-    public $showForm = true;
+    public $showForm = false;
     public CreateAddressForm $createAddress;
 
     public function mount() {
