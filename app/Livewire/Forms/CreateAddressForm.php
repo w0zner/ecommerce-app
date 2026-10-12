@@ -28,7 +28,7 @@ class CreateAddressForm extends Form
             'receiver' => 'required|in:1,2',
             'receiver_info' => 'required|array',
             'receiver_info.name' => 'required|string',
-            'receiver_info.last_name' => 'required|string',
+            'receiver_info.last_name' => 'string',
             'receiver_info.document_type' => [
                 'required', 
                 new Enum(TypeOfDocuments::class)

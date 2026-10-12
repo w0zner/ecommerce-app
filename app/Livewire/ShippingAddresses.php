@@ -30,6 +30,14 @@ class ShippingAddresses extends Component
         //dd($this->createAddress->receiver_info);
     }
 
+    public function store() {
+        $this->createAddress->save();
+        $this->addresses= Address::where('user_id', Auth::user()->id)->get();
+        // if($this->addresses->count() > 0) {
+        //     $this->showForm
+        // }
+    }
+
     public function render()
     {
         return view('livewire.shipping-addresses');

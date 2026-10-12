@@ -16,15 +16,24 @@
                     </div>
                     <div class="col-span-3">
                         <label for="type">Nombre de dirección</label>
-                        <input type="text" placeholder="Type here" class="input w-full" />
+                        <input type="text" placeholder="Direccion" class="input w-full" wire:model="createAddress.description"/>
+                        @error('createAddress.description')
+                            <span class="text-sm text-error">El campo es requerido</span>
+                        @enderror
                     </div>
                     <div class="col-span-2">
                         <label for="district">Ciudad</label>
                         <input type="text" placeholder="Ciudad" wire:model="createAddress.district" class="input w-full" />
+                         @error('createAddress.description')
+                            <span class="text-sm text-error">El campo es requerido</span>
+                        @enderror
                     </div>
                     <div class="col-span-2">
                         <label for="reference">Referencia</label>
                         <input type="text" placeholder="Referencia" wire:model="createAddress.reference" class="input w-full" />
+                         @error('createAddress.description')
+                            <span class="text-sm text-error">El campo es requerido</span>
+                        @enderror
                     </div>
                 </div>
                 <hr class="my-4" />
@@ -66,6 +75,9 @@
                     <div class="col-span-2">
                         <label for="district">Nombres</label>
                         <input type="text" :disabled="receiver==1" x-model="receiver_info.name" placeholder="Nombres"  class="input w-full" />
+                         @error('createAddress.description')
+                            <span class="text-sm text-error">El campo es requerido</span>
+                        @enderror
                     </div>
                     <div class="col-span-2">
                         <label for="reference">Apellidos</label>
@@ -83,6 +95,9 @@
                             </div>
                             <div  class="w-full">
                                 <input :disabled="receiver==1" type="text" x-model="receiver_info.document_number" placeholder="Número de documento"  class="input w-full" />
+                                 @error('createAddress.description')
+                                    <span class="text-sm text-error">El campo es requerido</span>
+                                @enderror
                             </div>
                         </div>
                         
@@ -90,6 +105,9 @@
                     <div class="col-span-2">
                         <label for="reference">Teléfono</label>
                         <input type="text"  x-model="receiver_info.phone" placeholder="Teléfono"  class="input w-full" />
+                         @error('createAddress.description')
+                            <span class="text-sm text-error">El campo es requerido</span>
+                        @enderror
                     </div>
                 </div>
                 <hr class="my-4" />
@@ -100,7 +118,7 @@
                     </button>
                     </div>
                     <div class="col-span-2">
-                    <button class="btn btn-primary w-full">
+                    <button class="btn btn-primary w-full" wire:click="store()">
                         Guardar
                     </button>
                 </div>
