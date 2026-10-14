@@ -33,8 +33,9 @@ class ShippingAddresses extends Component
     public function store() {
         $this->createAddress->save();
         $this->addresses= Address::where('user_id', Auth::user()->id)->get();
+        $this->showForm = false;
         // if($this->addresses->count() > 0) {
-        //     $this->showForm
+        //     $this->showForm = true;
         // }
     }
 

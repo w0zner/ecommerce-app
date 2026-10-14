@@ -18,21 +18,21 @@
                         <label for="type">Nombre de dirección</label>
                         <input type="text" placeholder="Direccion" class="input w-full" wire:model="createAddress.description"/>
                         @error('createAddress.description')
-                            <span class="text-sm text-error">El campo es requerido</span>
+                            <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
                     </div>
                     <div class="col-span-2">
                         <label for="district">Ciudad</label>
                         <input type="text" placeholder="Ciudad" wire:model="createAddress.district" class="input w-full" />
-                         @error('createAddress.description')
-                            <span class="text-sm text-error">El campo es requerido</span>
+                         @error('createAddress.district')
+                            <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
                     </div>
                     <div class="col-span-2">
                         <label for="reference">Referencia</label>
                         <input type="text" placeholder="Referencia" wire:model="createAddress.reference" class="input w-full" />
-                         @error('createAddress.description')
-                            <span class="text-sm text-error">El campo es requerido</span>
+                         @error('createAddress.reference')
+                            <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
                     </div>
                 </div>
@@ -75,8 +75,8 @@
                     <div class="col-span-2">
                         <label for="district">Nombres</label>
                         <input type="text" :disabled="receiver==1" x-model="receiver_info.name" placeholder="Nombres"  class="input w-full" />
-                         @error('createAddress.description')
-                            <span class="text-sm text-error">El campo es requerido</span>
+                         @error('createAddress.receiver_info.name')
+                            <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
                     </div>
                     <div class="col-span-2">
@@ -95,18 +95,18 @@
                             </div>
                             <div  class="w-full">
                                 <input :disabled="receiver==1" type="text" x-model="receiver_info.document_number" placeholder="Número de documento"  class="input w-full" />
-                                 @error('createAddress.description')
-                                    <span class="text-sm text-error">El campo es requerido</span>
+                                 @error('createAddress.receiver_info.document_number')
+                                    <span class="text-sm text-error"> {{ $message }} </span>
                                 @enderror
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="col-span-2">
                         <label for="reference">Teléfono</label>
                         <input type="text"  x-model="receiver_info.phone" placeholder="Teléfono"  class="input w-full" />
-                         @error('createAddress.description')
-                            <span class="text-sm text-error">El campo es requerido</span>
+                         @error('createAddress.receiver_info.phone')
+                            <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
                     </div>
                 </div>
@@ -123,10 +123,32 @@
                     </button>
                 </div>
                 </div>
-                
+
             @else
                  @if (count($addresses) > 0)
-
+                    <ul class="grid grid-cols-3 gap-4">
+                        @foreach ($addresses as $address)
+                            <li class="bg-slate-100 p-2 rounded-md shadow-md cursor-pointer">
+                                <div class="p-4 flex items-center">
+                                    <div>
+                                        {{-- <i class="fas fa-map-marker-alt"></i> --}}
+                                        <i class="fa-solid fa-house text-xl text-purple-600"></i>
+                                    </div>
+                                    <div class="flex-1 mx-4 text-xs">
+                                        <p class="font-semibold text-gray-800">{{$address->type == 1 ? 'Domicilio' : 'Oficina'}}</p>
+                                        <p class="text-gray-700">{{$address->district}}</p>
+                                        <p class="text-gray-700">{{$address->description}}</p>
+                                        <p class="text-purple-800 font-bold">{{$address->receiver_info['name'] . ' ' . $address->receiver_info['last_name']}} - {{$address->receiver_info['phone']}}</p>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-1 text-gray-700">
+                                        <button><i class="fas fa-star"></i></button>
+                                        <button><i class="fas fa-edit"></i></button>
+                                        <button><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
                 @else
                     <div role="alert" class="alert alert-vertical border-0 sm:alert-horizontal bg-white items-center">
                         {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current text-info h-6 w-6 shrink-0">
@@ -137,11 +159,12 @@
                             <a role="button" class="btn btn-primary text-white" href="{{route('welcome.index')}}">Volver a la tienda</a>
                         </div> --}}
                     </div>
-                    <button class="btn btn-outline btn-primary text-white w-full mt-2" wire:click="set('showForm', true)">
+
+                @endif
+                <button class="btn btn-outline btn-primary text-white w-full mt-2" wire:click="set('showForm', true)">
                         Agregar
                         <i class="fas fa-plus"></i>
                     </button>
-                @endif
             @endif
 
         </div>

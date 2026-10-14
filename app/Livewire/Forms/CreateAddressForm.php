@@ -28,9 +28,8 @@ class CreateAddressForm extends Form
             'receiver' => 'required|in:1,2',
             'receiver_info' => 'required|array',
             'receiver_info.name' => 'required|string',
-            'receiver_info.last_name' => 'string',
             'receiver_info.document_type' => [
-                'required', 
+                'required',
                 new Enum(TypeOfDocuments::class)
             ],
             'receiver_info.document_number' => 'required|string',
@@ -38,7 +37,21 @@ class CreateAddressForm extends Form
         ];
     }
 
+    public function validationAttributes() {
+        return [
+            'type' => 'tipo de dirección',
+            'description' => 'descripción',
+            'district' => 'ciudad',
+            'reference' => 'referencia',
+            'receiver' => 'receptor',
+            'receiver_info.name' => 'nombre del receptor',
+            'receiver_info.document_number' => 'número de documento del receptor',
+            'receiver_info.phone' => 'teléfono del receptor',
+        ];
+    }
+
     public function save() {
+
         $user=Auth::user();
         $this->validate();
 
@@ -47,7 +60,8 @@ class CreateAddressForm extends Form
         }
 
         Address::create([
-             'type' => $this->type,
+            'user_id' => $user->id,
+            'type' => $this->type,
             'description' => $this->description,
             'district' => $this->district,
             'reference' => $this->reference,
