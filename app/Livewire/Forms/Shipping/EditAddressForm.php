@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Livewire\Forms;
+namespace App\Livewire\Forms\Shipping;
 
 use App\Enums\TypeOfDocuments;
 use App\Models\Address;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Enum;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-class CreateAddressForm extends Form
+class EditAddressForm extends Form
 {
+    public $id=null;
     public $type='2';
     public $description='';
     public $district='';
@@ -21,6 +21,7 @@ class CreateAddressForm extends Form
 
     public function rules() {
         return [
+            'id' => 'required|integer|exists:addresses,id',
             'type' => 'required|in:1,2',
             'description' => 'required|string',
             'district' => 'required|string',
@@ -50,34 +51,29 @@ class CreateAddressForm extends Form
         ];
     }
 
-    public function save() {
+    public function edit(Address $address) {
+        $this->id = $address->id;
+        $this->type = $address->type;
+        $this->description = $address->description;
+        $this->district = $address->district;
+        $this->reference = $address->reference;
+        $this->receiver = $address->receiver;
+        $this->receiver_info = $address->receiver_info;
+        $this->default = $address->default;
+    }
 
-        $user=Auth::user();
+    public function update() {
         $this->validate();
-
-        if($user->addresses()->count() === 0) {
-            $this->default = true;
-        }
-
-        Address::create([
-            'user_id' => $user->id,
+        $address=Address::find($this->id);
+        $address->update([
             'type' => $this->type,
             'description' => $this->description,
             'district' => $this->district,
             'reference' => $this->reference,
             'receiver' => $this->receiver,
             'receiver_info' => $this->receiver_info,
-            'default' => $this->default
+            'default' => $this->default,
         ]);
-
         $this->reset();
-
-        $this->receiver_info = [
-             'name' => $user->name,
-            'last_name' => $user->last_nameme,
-            'document_type' => $user->document_type,
-            'document_number' => $user->document_number,
-            'phone' => $user->phone,
-        ];
     }
 }
