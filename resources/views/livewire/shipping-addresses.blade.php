@@ -265,7 +265,7 @@
                                     <div class="flex flex-col items-center gap-1 text-gray-700">
                                         <button wire:click="setDefault({{$address->id}})"><i class="fa-solid fa-star {{$address->default ? 'text-purple-600' : 'text-gray-700'}}"></i></button>
                                         <button wire:click="edit({{$address->id}})"><i class="fas fa-edit"></i></button>
-                                        <button><i class="fas fa-trash"></i></button>
+                                        <button wire:click="delete({{$address->id}})"><i class="fas fa-trash hover:text-red-600"></i></button>
                                     </div>
                                 </div>
                             </li>

@@ -48,7 +48,7 @@
                     <p class="text-lg font-bold">Total</p>
                     <p class="text-lg font-bold">Gs. {{ number_format($totalPrice, 0, ',', '.') }}</p>
                 </div>
-                <a class="btn bg-purple-600 hover:bg-purple-700 text-white btn-block rounded-md shadow-md">
+                <a href="{{route('shipping.index')}}" class="btn bg-purple-600 hover:bg-purple-700 text-white btn-block rounded-md shadow-md">
                     <i class="fa-solid fa-cart-shopping"></i>
                     Continuar compra
                 </a>

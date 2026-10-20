@@ -47,6 +47,12 @@ class ShippingAddresses extends Component
         $this->showForm = false;
     }
 
+    public function delete($id) {
+        $address=Address::find($id);
+        $address->delete();
+        $this->addresses= Address::where('user_id', Auth::user()->id)->get();
+    }
+
     public function edit($id) {
         $address=Address::find($id);
         $this->editAddress->edit($address);
