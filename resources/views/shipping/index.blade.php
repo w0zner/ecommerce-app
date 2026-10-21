@@ -14,16 +14,32 @@
                         <ul>
                             @foreach($cartItems as $item)
                                 <li class="flex items-center space-x-4">
-                                    <img class="w-full lg:w-36  rounded-md aspect-square object-cover object-center shadow-md mr-4" src="{{json_decode($item->options)->image}}" alt="">
-                                    <div>
-                                        <p>{{$item->itemable->name}}</p>
-                                    </div>
-                                    <div>
+                                    <figure class="shrink-0">
+                                        <img class="w-full lg:w-36  rounded-md aspect-square object-cover object-center shadow-md mr-4" src="{{json_decode($item->options)->image}}" alt="">
+                                    </figure>
+                                    <div class="flex-1">
+                                        <p class="truncate font-bold">{{$item->itemable->name}}</p>
 
+                                        <p class="text-sm">
+                                            Gs. {{ number_format($item->itemable->price, 0, ',', '.') }}
+                                        </p>
+                                    </div>
+                                    <div class="shrink-0 mr-2">
+                                        <p class="text-lg font-bold">{{$item->quantity}}</p>
                                     </div>
                                 </li>
                             @endforeach
                         </ul>
+                        <hr class="my-4">
+                        <div class="flex justify-between">
+                            <p class="text-lg">Total</p>
+                            <p class="text-lg font-bold">Gs. {{ number_format($totalPrice, 0, ',', '.') }}</p>
+                        </div>
+                        <hr class="my-4">
+                        <a href="{{route('shipping.index')}}" class="btn bg-purple-600 hover:bg-purple-700 text-white btn-block rounded-md shadow-md">
+                            Continuar compra
+                            <i class="fa-solid fa-circle-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>

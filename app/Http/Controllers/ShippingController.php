@@ -20,10 +20,21 @@ class ShippingController extends Controller
             ->first();
 
         $cartItems=[];
+        $totalPrice=0;
         if($cart) {
             $cartItems = $cart->items()->with('itemable')->get();
+
+            if(count($cartItems) > 0) {
+                $totalPrice = $cartItems->sum(function($item){
+                    return $item['itemable']['price'] * $item['quantity'];
+                });
+            } else {
+                $totalPrice = 0;
+            }
         }
 
-        return view('shipping.index', compact('cart', 'cartItems'));
+        
+
+        return view('shipping.index', compact('cart', 'cartItems', 'totalPrice'));
     }
 }
