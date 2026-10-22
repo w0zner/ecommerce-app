@@ -30,7 +30,7 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <hr class="my-4">
+                        <hr class="my-4"> 
                         <div class="flex justify-between">
                             <p class="text-lg">Total</p>
                             <p class="text-lg font-bold">Gs. {{ number_format($totalPrice, 0, ',', '.') }}</p>
