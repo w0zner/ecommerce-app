@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShippingController;
@@ -29,6 +30,8 @@ $userId = Auth::user()->id;
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 Route::get('/shipping', [ShippingController::class, 'index'])->name('shipping.index');
+
+Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
 Route::get('families/{family}', [FamilyController::class, 'show'])->name('families.show');
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
