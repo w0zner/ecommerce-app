@@ -30,13 +30,23 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <hr class="my-4"> 
-                        <div class="flex justify-between">
-                            <p class="text-lg">Total</p>
-                            <p class="text-lg font-bold">Gs. {{ number_format($totalPrice, 0, ',', '.') }}</p>
+                        <hr class="my-4">
+                           @livewire('shipping-type')
+                        <hr class="my-4">
+                        <div x-data="{ shippingCost: {{ session('shipping_cost', 25000) }}, subtotal: {{ $totalPrice }} }"
+                             x-on:shipping-updated.window="shippingCost = $event.detail.shippingCost"
+                        >
+                            <div class="flex justify-between">
+                                <p class="text-lg">Subtotal</p>
+                                <p class="text-lg">Gs. {{ number_format($totalPrice, 0, ',', '.') }}</p>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <p class="text-lg font-bold">Total</p>
+                                <p class="text-lg font-bold" x-text="'Gs. ' + (subtotal + shippingCost).toLocaleString('es-PY')"></p>
+                            </div>
                         </div>
                         <hr class="my-4">
-                        <a href="{{route('shipping.index')}}" class="btn bg-purple-600 hover:bg-purple-700 text-white btn-block rounded-md shadow-md">
+                        <a href="{{route('checkout.index')}}" class="btn bg-purple-600 hover:bg-purple-700 text-white btn-block rounded-md shadow-md">
                             Continuar compra
                             <i class="fa-solid fa-circle-arrow-right"></i>
                         </a>

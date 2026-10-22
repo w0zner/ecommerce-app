@@ -14,6 +14,7 @@ class ShippingAddresses extends Component
     public $showForm = false;
     public CreateAddressForm $createAddress;
     public EditAddressForm $editAddress;
+    
 
     public function mount() {
         if(!Auth::check()) {
