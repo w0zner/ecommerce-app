@@ -5,53 +5,7 @@
                 @livewire('shipping-addresses')
             </div>
             <div class="col-span-1">
-                <div class="bg-white rounded-lg shadow overflow-hidden">
-                    <div class="bg-purple-600 text-white p-3 flex justify-between items-center">
-                        <p class="font-semibold">Resumen de la compra ({{$cartItems->count()}})</p>
-                        <a href="{{ route('cart.index') }}"><i class="fa-solid fa-cart-shopping"></i></a>
-                    </div>
-                    <div class="p-3">
-                        <ul>
-                            @foreach($cartItems as $item)
-                                <li class="flex items-center space-x-4">
-                                    <figure class="shrink-0">
-                                        <img class="w-full lg:w-36  rounded-md aspect-square object-cover object-center shadow-md mr-4" src="{{json_decode($item->options)->image}}" alt="">
-                                    </figure>
-                                    <div class="flex-1">
-                                        <p class="truncate font-bold">{{$item->itemable->name}}</p>
-
-                                        <p class="text-sm">
-                                            Gs. {{ number_format($item->itemable->price, 0, ',', '.') }}
-                                        </p>
-                                    </div>
-                                    <div class="shrink-0 mr-2">
-                                        <p class="text-lg font-bold">{{$item->quantity}}</p>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                        <hr class="my-4">
-                           @livewire('shipping-type')
-                        <hr class="my-4">
-                        <div x-data="{ shippingCost: {{ session('shipping_cost', 25000) }}, subtotal: {{ $totalPrice }} }"
-                             x-on:shipping-updated.window="shippingCost = $event.detail.shippingCost"
-                        >
-                            <div class="flex justify-between">
-                                <p class="text-lg">Subtotal</p>
-                                <p class="text-lg">Gs. {{ number_format($totalPrice, 0, ',', '.') }}</p>
-                            </div>
-                            <div class="flex justify-between mt-1">
-                                <p class="text-lg font-bold">Total</p>
-                                <p class="text-lg font-bold" x-text="'Gs. ' + (subtotal + shippingCost).toLocaleString('es-PY')"></p>
-                            </div>
-                        </div>
-                        <hr class="my-4">
-                        <a href="{{route('checkout.index')}}" class="btn bg-purple-600 hover:bg-purple-700 text-white btn-block rounded-md shadow-md">
-                            Continuar compra
-                            <i class="fa-solid fa-circle-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
+                @livewire('shipping-type', ['cart' => $cart, 'cartItems' => $cartItems, 'totalPrice' => $totalPrice])
             </div>
         </div>
     </x-container>

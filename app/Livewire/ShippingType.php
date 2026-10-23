@@ -6,6 +6,9 @@ use Livewire\Component;
 
 class ShippingType extends Component
 {
+    public $cart;
+    public $cartItems;
+    public $totalPrice;
     public $shippingType = 'delivery';
     public $shippingCost = 25000;
 
@@ -34,8 +37,7 @@ class ShippingType extends Component
             'shipping_cost' => $this->shippingCost,
         ]);
 
-        // Emitir evento para que otros componentes (ej: resumen de compra) puedan reaccionar
-        $this->dispatch('shippingUpdated', shippingType: $this->shippingType, shippingCost: $this->shippingCost);
+        $this->dispatch('shipping-updated', shippingType: $this->shippingType, shippingCost: $this->shippingCost);
     }
 
     public function render()

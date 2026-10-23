@@ -55,10 +55,15 @@
                 </div>
             </div>
             <div class="col-span-1">
+                <form action="{{ route('checkout.process') }}" method="POST">
+                    @csrf
                 <div class="lg:max-w-[40rem] py-12 px-4 lg:pl-8 sm:pr-6 lg:pr-8 mr-auto">
                     <div class="overflow-hidden">
                     <div class=" p-3 flex justify-between items-center">
-                        <h1 class="text-2xl font-semibold mb-2">Resumen de la compra ({{$cartItems->count()}})</h1>
+                        <div class="flex items-center gap-2">
+                            <a href="{{ route('shipping.index') }}"><i class="fa-solid fa-circle-arrow-left"></i></a>
+                            <h1 class="text-2xl font-semibold ">Resumen de la compra ({{$cartItems->count()}})</h1>
+                        </div>
                         <a href="{{ route('cart.index') }}"><i class="fa-solid fa-cart-shopping"></i></a>
                     </div>
                     <div class="p-3">
@@ -66,7 +71,7 @@
                             @foreach($cartItems as $item)
                                 <li class="flex items-center space-x-4">
                                     <figure class="shrink-0">
-                                        <img class="w-full lg:w-36  rounded-md aspect-square object-cover object-center shadow-md mr-4" src="{{json_decode($item->options)->image}}" alt="">
+                                        <img class="w-full lg:w-36  rounded-md aspect-square object-cover object-center shadow-lg mr-4" src="{{json_decode($item->options)->image}}" alt="">
                                     </figure>
                                     <div class="flex-1">
                                         <p class="truncate font-bold">{{$item->itemable->name}}</p>
@@ -81,11 +86,12 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <hr class="my-4"> 
+                        <hr class="my-4">
                         <div class="flex justify-between">
                             <p class="text-lg">SubTotal</p>
                             <p class="text-md">Gs. {{ number_format($totalPrice, 0, ',', '.') }}</p>
                         </div>
+
                         <div class="flex justify-between">
                             <p class="text-lg">Precio de envío</p>
                             <p class="text-md">Gs. {{ number_format($precioEnvio, 0, ',', '.') }}</p>
@@ -96,13 +102,15 @@
                             <p class="text-lg font-bold">Gs. {{ number_format($totalPrice + $precioEnvio, 0, ',', '.') }}</p>
                         </div>
                         <hr class="my-4">
-                        <a href="{{route('checkout.index')}}" class="btn bg-purple-600 hover:bg-purple-700 text-white btn-block rounded-md shadow-md">
+                        <input type="hidden" name="pago" :value="pago">
+                        <button type="submit" class="btn bg-purple-600 hover:bg-purple-700 text-white btn-block rounded-md shadow-md">
                             Finalizar compra
                             <i class="fa-solid fa-circle-check"></i>
-                        </a>
+                        </button>
                     </div>
-                </div>                    
                 </div>
+                </div>
+                </form>
             </div>
         </div>
     </div>

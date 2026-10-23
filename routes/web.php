@@ -32,6 +32,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/shipping', [ShippingController::class, 'index'])->name('shipping.index');
 
 Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 
 Route::get('families/{family}', [FamilyController::class, 'show'])->name('families.show');
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
