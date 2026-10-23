@@ -30,16 +30,12 @@ class ShippingAddresses extends Component
             'document_number' => $user->document_number,
             'phone' => $user->phone,
         ];
-        //dd($this->createAddress->receiver_info);
     }
 
     public function store() {
         $this->createAddress->save();
         $this->addresses= Address::where('user_id', Auth::user()->id)->get();
         $this->showForm = false;
-        // if($this->addresses->count() > 0) {
-        //     $this->showForm = true;
-        // }
     }
 
     public function update() {

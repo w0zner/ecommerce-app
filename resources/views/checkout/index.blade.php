@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="col-span-1">
-                <form action="{{ route('checkout.process') }}" method="POST">
+                <form action="{{ route('checkout.process') }}" method="POST" onsubmit="confirmDelete(event, pago)">
                     @csrf
                 <div class="lg:max-w-[40rem] py-12 px-4 lg:pl-8 sm:pr-6 lg:pr-8 mr-auto">
                     <div class="overflow-hidden">
@@ -114,4 +114,30 @@
             </div>
         </div>
     </div>
+
+@push('js')
+    <script>
+        function confirmDelete(event, pago) {
+            event.preventDefault();
+            let mensaje='';
+            if(pago.value==1){
+                mensaje="<p>Luego de confirmar su compra esperamos la captura del depósito bancario al Whatsapp</p><hr><br><b><h5>Gracias por su preferencia!</h5></b>"
+            } else {
+                mensaje="<p>Luego de confirmar su compra, nos estamos contactando por Whatsapp para el envío del Link de pago</p><hr><br><b><h5>Gracias por su preferencia!</h5></b>"
+            }
+            Swal.fire({
+            title: "Estas por confirmar la compra!",
+            icon: "info",
+            html: mensaje,
+            showCancelButton: true,
+            confirmButtonColor: "#097969",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Confirmar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) event.target.submit();
+        });
+        }        
+    </script>
+@endpush        
 </x-app-layout>
