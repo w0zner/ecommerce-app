@@ -7,6 +7,12 @@
             'active' => request()->routeIs('admin.dashboard'),
         ],
         [
+            'name' => 'Empresa',
+            'icon' => 'fa-solid fa-industry',
+            'route' => route('admin.company.index'),
+            'active' => request()->routeIs('admin.company.index'),
+        ],
+        [
             'name' => 'Familias',
             'icon' => 'fa-solid fa-box-open',
             'route' => route('admin.families.index'),
