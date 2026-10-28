@@ -27,7 +27,7 @@
         <hr class="my-4">
         <div>
             <label class="mr-5 space-x-1 cursor-pointer">
-                <input type="radio" name="shipping_type" wire:model.live="shippingType" value="delivery"
+                <input type="radio" name="shipping_type" wire:model.live="shippingType" value="delivery" @disabled(!$addresses || $addresses->count() == 0)
                     class="radio bg-green-100 border-green-300 checked:bg-green-500 checked:text-green-600 checked:border-green-600" />
                 <span>Delivery</span>
             </label>

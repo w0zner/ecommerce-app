@@ -44,7 +44,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($company as $company)
+                {{-- @foreach ($company as $company) --}}
                     <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                         <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                             {{ $company->name }}
@@ -78,7 +78,7 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+                {{-- @endforeach --}}
             </tbody>
         </table>
     </div>

@@ -36,6 +36,8 @@ class ShippingAddresses extends Component
         $this->createAddress->save();
         $this->addresses= Address::where('user_id', Auth::user()->id)->get();
         $this->showForm = false;
+
+        $this->dispatch('shipping-exist');
     }
 
     public function update() {
@@ -48,6 +50,8 @@ class ShippingAddresses extends Component
         $address=Address::find($id);
         $address->delete();
         $this->addresses= Address::where('user_id', Auth::user()->id)->get();
+
+        $this->dispatch('shipping-exist');
     }
 
     public function edit($id) {

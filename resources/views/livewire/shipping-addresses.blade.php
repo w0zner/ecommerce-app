@@ -8,7 +8,7 @@
                 <div class="grid grid-cols-4 gap-4">
                     <div class="col-span-1">
                         <label for="type">Tipo dirección</label>
-                        <select class="select" id="type" wire:model="createAddress.type">
+                        <select class="select border border-gray-300" id="type" wire:model="createAddress.type">
                             <option disabled selected>Seleccione una opción</option>
                             <option value="1">Domicilio</option>
                             <option value="2">Oficina</option>
@@ -16,21 +16,21 @@
                     </div>
                     <div class="col-span-3">
                         <label for="type">Nombre de dirección</label>
-                        <input type="text" placeholder="Direccion" class="input w-full" wire:model="createAddress.description"/>
+                        <input type="text" placeholder="Direccion" class="input w-full border border-gray-300" wire:model="createAddress.description"/>
                         @error('createAddress.description')
                             <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
                     </div>
                     <div class="col-span-2">
                         <label for="district">Ciudad</label>
-                        <input type="text" placeholder="Ciudad" wire:model="createAddress.district" class="input w-full" />
+                        <input type="text" placeholder="Ciudad" wire:model="createAddress.district" class="input w-full border border-gray-300" />
                          @error('createAddress.district')
                             <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
                     </div>
                     <div class="col-span-2">
                         <label for="reference">Referencia</label>
-                        <input type="text" placeholder="Referencia" wire:model="createAddress.reference" class="input w-full" />
+                        <input type="text" placeholder="Referencia" wire:model="createAddress.reference" class="input w-full border border-gray-300" />
                          @error('createAddress.reference')
                             <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
@@ -74,14 +74,14 @@
                 }">
                     <div class="col-span-2">
                         <label for="district">Nombres</label>
-                        <input type="text" :disabled="receiver==1" x-model="receiver_info.name" placeholder="Nombres"  class="input w-full" />
+                        <input type="text" :disabled="receiver==1" x-model="receiver_info.name" placeholder="Nombres"  class="input w-full border border-gray-300" />
                          @error('createAddress.receiver_info.name')
                             <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
                     </div>
                     <div class="col-span-2">
                         <label for="reference">Apellidos</label>
-                        <input type="text" :disabled="receiver==1" x-model="receiver_info.last_name" placeholder="Apellidos" class="input w-full" />
+                        <input type="text" :disabled="receiver==1" x-model="receiver_info.last_name" placeholder="Apellidos" class="input w-full border border-gray-300" />
                     </div>
                     <div class="col-span-2">
                         <label for="district">Número de documento</label>
@@ -94,7 +94,7 @@
                                 </select>
                             </div>
                             <div  class="w-full">
-                                <input :disabled="receiver==1" type="text" x-model="receiver_info.document_number" placeholder="Número de documento"  class="input w-full" />
+                                <input :disabled="receiver==1" type="text" x-model="receiver_info.document_number" placeholder="Número de documento"  class="input w-full border border-gray-300" />
                                  @error('createAddress.receiver_info.document_number')
                                     <span class="text-sm text-error"> {{ $message }} </span>
                                 @enderror
@@ -104,7 +104,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="reference">Teléfono</label>
-                        <input type="text"  x-model="receiver_info.phone" placeholder="Teléfono"  class="input w-full" />
+                        <input type="text"  x-model="receiver_info.phone" placeholder="Teléfono"  class="input w-full border border-gray-300" />
                          @error('createAddress.receiver_info.phone')
                             <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
@@ -114,11 +114,13 @@
                 <div class="grid grid-cols-4 gap-4 mt-4">
                     <div class="col-span-2">
                         <button class="btn btn-outline btn-error w-full" wire:click="$set('showForm', false)">
+                            <i class="fa-solid fa-ban"></i>
                             Cancelar
                         </button>
                     </div>
                     <div class="col-span-2">
                         <button class="btn btn-primary w-full" wire:click="store()">
+                            <i class="fa-solid fa-lock"></i>
                             Guardar
                         </button>
                     </div>
@@ -130,7 +132,7 @@
                     <div class="grid grid-cols-4 gap-4">
                     <div class="col-span-1">
                         <label for="type">Tipo dirección</label>
-                        <select class="select" id="type" wire:model="editAddress.type">
+                        <select class="select border border-gray-300" id="type" wire:model="editAddress.type">
                             <option disabled selected>Seleccione una opción</option>
                             <option value="1">Domicilio</option>
                             <option value="2">Oficina</option>
@@ -138,21 +140,21 @@
                     </div>
                     <div class="col-span-3">
                         <label for="type">Nombre de dirección</label>
-                        <input type="text" placeholder="Direccion" class="input w-full" wire:model="editAddress.description"/>
+                        <input type="text" placeholder="Direccion" class="input w-full border border-gray-300" wire:model="editAddress.description"/>
                         @error('editAddress.description')
                             <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
                     </div>
                     <div class="col-span-2">
                         <label for="district">Ciudad</label>
-                        <input type="text" placeholder="Ciudad" wire:model="editAddress.district" class="input w-full" />
+                        <input type="text" placeholder="Ciudad" wire:model="editAddress.district" class="input w-full border border-gray-300" />
                          @error('editAddress.district')
                             <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
                     </div>
                     <div class="col-span-2">
                         <label for="reference">Referencia</label>
-                        <input type="text" placeholder="Referencia" wire:model="editAddress.reference" class="input w-full" />
+                        <input type="text" placeholder="Referencia" wire:model="editAddress.reference" class="input w-full border border-gray-300" />
                          @error('editAddress.reference')
                             <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
@@ -196,14 +198,14 @@
                 }">
                     <div class="col-span-2">
                         <label for="district">Nombres</label>
-                        <input type="text" :disabled="receiver==1" x-model="receiver_info.name" placeholder="Nombres"  class="input w-full" />
+                        <input type="text" :disabled="receiver==1" x-model="receiver_info.name" placeholder="Nombres"  class="input w-full border border-gray-300" />
                          @error('editAddress.receiver_info.name')
                             <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
                     </div>
                     <div class="col-span-2">
                         <label for="reference">Apellidos</label>
-                        <input type="text" :disabled="receiver==1" x-model="receiver_info.last_name" placeholder="Apellidos" class="input w-full" />
+                        <input type="text" :disabled="receiver==1" x-model="receiver_info.last_name" placeholder="Apellidos" class="input w-full border border-gray-300" />
                     </div>
                     <div class="col-span-2">
                         <label for="district">Número de documento</label>
@@ -216,7 +218,7 @@
                                 </select>
                             </div>
                             <div  class="w-full">
-                                <input :disabled="receiver==1" type="text" x-model="receiver_info.document_number" placeholder="Número de documento"  class="input w-full" />
+                                <input :disabled="receiver==1" type="text" x-model="receiver_info.document_number" placeholder="Número de documento"  class="input w-full border border-gray-300" />
                                  @error('editAddress.receiver_info.document_number')
                                     <span class="text-sm text-error"> {{ $message }} </span>
                                 @enderror
@@ -226,7 +228,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="reference">Teléfono</label>
-                        <input type="text"  x-model="receiver_info.phone" placeholder="Teléfono"  class="input w-full" />
+                        <input type="text"  x-model="receiver_info.phone" placeholder="Teléfono"  class="input w-full border border-gray-300" />
                          @error('editAddress.receiver_info.phone')
                             <span class="text-sm text-error"> {{ $message }} </span>
                         @enderror
@@ -236,11 +238,13 @@
                 <div class="grid grid-cols-4 gap-4 mt-4">
                     <div class="col-span-2">
                         <button class="btn btn-outline btn-error w-full" wire:click="$set('editAddress.id', null)">
+                            <i class="fa-solid fa-ban"></i>
                             Cancelar
                         </button>
                     </div>
                     <div class="col-span-2">
                         <button class="btn btn-primary w-full" wire:click="update()">
+                            <i class="fa-solid fa-lock"></i>
                             Actualizar
                         </button>
                     </div>
