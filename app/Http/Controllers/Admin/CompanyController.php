@@ -12,4 +12,14 @@ class CompanyController extends Controller
         $company = Company::query()->first();
         return view('admin.company.index', compact('company'));
     }
+
+    public function create() {
+        return view('admin.company.create');
+    }
+
+    public function store(Request $request) {
+        //$company = Company::query()->create($request->all());
+        //return redirect()->route('admin.company.index');
+        dd($request->all());
+    }
 }

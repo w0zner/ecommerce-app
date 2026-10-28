@@ -9,7 +9,7 @@
 ]">
 @if(!$company)
 <x-slot name="action">
-    <a href="{{ route('admin.families.create') }}" role="button" class="btn btn-neutral">
+    <a href="{{ route('admin.company.create') }}" role="button" class="btn btn-neutral">
         <i class="fa-solid fa-plus"></i> Agregar
     </a>
 </x-slot>
