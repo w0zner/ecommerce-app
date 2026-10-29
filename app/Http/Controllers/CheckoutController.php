@@ -113,9 +113,9 @@ class CheckoutController extends Controller
 
             //return redirect()->away($whatsappUrl);
             //return view('checkout.send', compact('whatsappUrl'));
-            return redirect()->back() // o a la ruta que prefieras
-        ->with('whatsappUrl', $whatsappUrl)
-        ->with('showWhatsappModal', true);
+            return redirect()->back()
+                    ->with('whatsappUrl', $whatsappUrl)
+                    ->with('showWhatsappModal', true);
         }
 
 
