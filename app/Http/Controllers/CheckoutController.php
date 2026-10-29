@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\Company;
 use Binafy\LaravelCart\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,12 +101,21 @@ class CheckoutController extends Controller
 
             // 5. Opcional: Vaciar carrito o registrar pedido en base dedatos
             // $cart->items()->delete();
+            $company = Company::query()->first();
 
-            $telefonoTienda = '595972226375';
+            if(!$company) {
+                return redirect()->route('cart.index')->with('error', 'No se encontró la información de la tienda para el envío de la orden, contacte con el Administrador de la tienda!');
+            }
+
+            $telefonoTienda = $company->whatsapp;
 
             $whatsappUrl = 'https://wa.me/' . $telefonoTienda . '?text=' . urlencode($mensaje);
 
-            return redirect()->away($whatsappUrl);
+            //return redirect()->away($whatsappUrl);
+            //return view('checkout.send', compact('whatsappUrl'));
+            return redirect()->back() // o a la ruta que prefieras
+        ->with('whatsappUrl', $whatsappUrl)
+        ->with('showWhatsappModal', true);
         }
 
 

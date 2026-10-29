@@ -19,10 +19,6 @@ class CompanyController extends Controller
     }
 
     public function store(Request $request) {
-        //$company = Company::query()->create($request->all());
-        //return redirect()->route('admin.company.index');
-        //dd($request->all());
-
         $validatedData = $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|string|email|max:255|unique:users,email',

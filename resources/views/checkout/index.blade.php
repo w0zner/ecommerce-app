@@ -137,7 +137,39 @@
         }).then((result) => {
             if (result.isConfirmed) event.target.submit();
         });
-        }        
+        }
     </script>
-@endpush        
+@endpush
+
+
+<div x-data="{ openModal: {{ session('showWhatsappModal') ? 'true' : 'false' }} }">
+
+    <!-- Modal (Se muestra automáticamente si el controlador envió la señal) -->
+    <div x-show="openModal"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+         style="display: none;">
+
+        <div @click.away="openModal = false" class="bg-white rounded-lg p-6 max-w-md w-full shadow-xl">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Contacto a la Tienda</h3>
+            <p class="text-gray-600 mb-4">La orden está lista. Haz clic en el botón para enviar por WhatsApp en una pestaña nueva.</p>
+
+            <div class="flex justify-end space-x-3">
+                <button @click="openModal = false" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">
+                    Cerrar
+                </button>
+
+                <!-- Enlace dinámico que viene del controlador vía sesión -->
+                <a href="{{ session('whatsappUrl') }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   @click="openModal = false"
+                   class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
+                   <i class="fa-brands fa-whatsapp"></i>
+                    Abrir WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 </x-app-layout>
