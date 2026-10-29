@@ -144,7 +144,6 @@
 
 <div x-data="{ openModal: {{ session('showWhatsappModal') ? 'true' : 'false' }} }">
 
-    <!-- Modal (Se muestra automáticamente si el controlador envió la señal) -->
     <div x-show="openModal"
          class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
          style="display: none;">
@@ -158,7 +157,6 @@
                     Cerrar
                 </button>
 
-                <!-- Enlace dinámico que viene del controlador vía sesión -->
                 <a href="{{ session('whatsappUrl') }}"
                    target="_blank"
                    rel="noopener noreferrer"
