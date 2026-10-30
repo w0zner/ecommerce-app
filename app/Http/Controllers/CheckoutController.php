@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Company;
+use App\Models\Order;
 use Binafy\LaravelCart\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,6 +69,13 @@ class CheckoutController extends Controller
 
             // 3. Dirección de entrega (si es delivery)
             $direccion = Address::where('user_id', $user->id)->where('default', true)->first();
+
+            Order::create([
+                'user_id' => Auth::user()->id(),
+                'content' => $cartItems,
+                'payment_id' => $request->input('pago', '1'),
+                'total' => $total
+            ]);
 
             // 4. Construir el texto del pedido
             $mensaje = "🛒 *NUEVO PEDIDO*\n";

@@ -10,6 +10,7 @@ export default {
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './vendor/rappasoft/laravel-livewire-tables/resources/views/**/*.blade.php',
     ],
     theme: {
         extend: {
