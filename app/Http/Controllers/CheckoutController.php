@@ -54,7 +54,7 @@ class CheckoutController extends Controller
                 return $item->itemable->price * $item->quantity;
             });
 
-            // 1. Obtener tipo y costo de envío desde la sesión
+            //Obtener tipo y costo de envío desde la sesión
             $shippingType = session('shipping_type', 'delivery');
             $shippingCost = session('shipping_cost', ($shippingType === 'carry_out' ? 0 : 25000));
             $total = $subtotal + $shippingCost;
@@ -71,7 +71,7 @@ class CheckoutController extends Controller
             $direccion = Address::where('user_id', $user->id)->where('default', true)->first();
 
             Order::create([
-                'user_id' => Auth::user()->id(),
+                'user_id' => $user->id,
                 'content' => $cartItems,
                 'payment_id' => $request->input('pago', '1'),
                 'total' => $total
@@ -120,10 +120,10 @@ class CheckoutController extends Controller
             $whatsappUrl = 'https://wa.me/' . $telefonoTienda . '?text=' . urlencode($mensaje);
 
             //return redirect()->away($whatsappUrl);
-            //return view('checkout.send', compact('whatsappUrl'));
-            return redirect()->back()
-                    ->with('whatsappUrl', $whatsappUrl)
-                    ->with('showWhatsappModal', true);
+            return view('checkout.send', compact('whatsappUrl'));
+            //return redirect()->back()
+            //        ->with('whatsappUrl', $whatsappUrl)
+            //        ->with('showWhatsappModal', true);
         }
 
 
