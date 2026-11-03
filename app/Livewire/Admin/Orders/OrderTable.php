@@ -18,12 +18,42 @@ class OrderTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make("N° Orden", "id")
                 ->sortable(),
-            Column::make("Created at", "created_at")
+            Column::make("Cantidad", "content")
+                ->format(function($value) {
+                    return count($value);
+                })
                 ->sortable(),
-            Column::make("Updated at", "updated_at")
+            Column::make("Total", "total")
+                ->format(function($value) {
+                    return "Gs. ".number_format($value, 0, null, '.');
+                })
                 ->sortable(),
+            Column::make("Forma de pago", "payment_method")
+                ->format(function($value) {
+                    return $value->name;
+                })
+                ->sortable(),
+            Column::make("Estado", "status")
+                ->format(function($value) {
+                    return $value->name;
+                })
+                ->sortable(),
+            Column::make("Fecha Creación", "created_at")
+                ->format(function($value) {
+                    return $value->format('d/m/Y H:i:s');
+                })
+                ->sortable(),
+            Column::make("Acciones")
+                ->label(function($row) {
+                    return view('admin.orders.actions', ['order' => $row]);
+                }),
+           /*  Column::make("Fecha Actualización", "updated_at")
+            ->format(function($value) {
+                    return $value->format('d/m/Y H:i:s');
+                })
+                ->sortable(), */
         ];
     }
 }

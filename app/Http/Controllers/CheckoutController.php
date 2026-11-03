@@ -70,12 +70,20 @@ class CheckoutController extends Controller
             // 3. Dirección de entrega (si es delivery)
             $direccion = Address::where('user_id', $user->id)->where('default', true)->first();
 
+            $company = Company::query()->first();
+
+            if(!$company) {
+                return redirect()->route('cart.index')->with('error', 'No se encontró la información de la tienda para el envío de la orden, contacte con el Administrador de la tienda!');
+            }
+
             Order::create([
                 'user_id' => $user->id,
                 'content' => $cartItems,
-                'payment_id' => $request->input('pago', '1'),
+                'payment_method' => $request->input('pago', '1'),
                 'total' => $total
             ]);
+
+            $cart->items()->delete();
 
             // 4. Construir el texto del pedido
             $mensaje = "🛒 *NUEVO PEDIDO*\n";
@@ -109,11 +117,7 @@ class CheckoutController extends Controller
 
             // 5. Opcional: Vaciar carrito o registrar pedido en base dedatos
             // $cart->items()->delete();
-            $company = Company::query()->first();
 
-            if(!$company) {
-                return redirect()->route('cart.index')->with('error', 'No se encontró la información de la tienda para el envío de la orden, contacte con el Administrador de la tienda!');
-            }
 
             $telefonoTienda = $company->whatsapp;
 
