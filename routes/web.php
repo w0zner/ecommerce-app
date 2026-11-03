@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\WelcomeController;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Variant;
 use Binafy\LaravelCart\Models\Cart;
@@ -15,6 +16,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
+
+Route::get('/test', function() {
+    $order = Order::first();
+    return view('orders.ticket', compact('order'));
+});
 
 Route::get('/cartest', function (){
 $userId = Auth::user()->id;

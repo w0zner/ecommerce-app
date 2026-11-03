@@ -129,6 +129,4 @@ class CheckoutController extends Controller
             //        ->with('whatsappUrl', $whatsappUrl)
             //        ->with('showWhatsappModal', true);
         }
-
-
 }
