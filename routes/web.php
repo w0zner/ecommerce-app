@@ -10,7 +10,9 @@ use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\Variant;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Binafy\LaravelCart\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +21,22 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 
 Route::get('/test', function() {
     $order = Order::first();
-    return view('orders.ticket', compact('order'));
+    $user_order = User::find($order->user_id);
+    $user_current = Auth::user();
+    if($user_current->id == $user_order->id) {
+        $user = $user_order;
+    }
+    $pdf = Pdf::loadView('orders.ticket', compact('order', 'user'))->setPaper('a5');
+
+    $pdf->save(storage_path('app/public/tickets/ticket-'.$order->id.'.pdf'));
+    $order->pdf_path = 'tickets/ticket-'.$order->id.'.pdf';
+    $order->save();
+
+    return "Ticket generado con éxito";
+
+    return $pdf->stream();
+
+    //return view('orders.ticket', compact('order', 'user'));
 });
 
 Route::get('/cartest', function (){

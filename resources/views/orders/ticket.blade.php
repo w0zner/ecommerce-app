@@ -20,8 +20,22 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        h3 {
+            margin-bottom: 15px;
+        }
         .info {
             margin-bottom: 20px;
+        }
+        .info div {
+            margin-bottom: 5px;
+        }
+        .footer {
+            text-align: center;
+            font-weight: bold;
+        }
+        .text-right {
+            text-align: right;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -29,7 +43,7 @@
     <div class="ticket">
         <h4>Numero de orden: {{ $order->id }}</h4>
         <div class="info">
-            <h3>Informacion de la compañia</h3>
+            <h3>Informacion de la Empresa</h3>
             <div>Nombre: Ecommerce SAE</div>
             <div>RUC: 12345678-9</div>
             <div>Direccion: Calle 123, Asunción, Paraguay</div>
@@ -37,12 +51,18 @@
             <div>Correo: info@ecommerce.com</div>
         </div>
         <div class="info">
-            <h3>Datos del cliente</h3>
-            <div>Nombre: Ecommerce SAE</div>
-            <div>RUC: 12345678-9</div>
-            <div>Direccion: Calle 123, Asunción, Paraguay</div>
-            <div>Telefono: 0972226375</div>
-            <div>Correo: info@ecommerce.com</div>
+            <h3>Datos del Cliente</h3>
+            <div>Nombre: {{ $user->name ?? 'Cliente' }} {{ $user->last_name ?? '' }}</div>
+            <div>RUC: {{ $user->document_number ?? '' }}</div>
+            <div>Direccion: {{ $user->address ?? 'No especificado' }}</div>
+            <div>Telefono: {{ $user->phone }}</div>
+            <div>Correo: {{ $user->email }}</div>
+        </div>
+       {{--  <div class="info">
+            <div class="text-right">Total Gs. {{ $order->total }}</div>
+        </div> --}}
+        <div class="footer">
+            Gracias por su compra!
         </div>
     </div>
 </body>
