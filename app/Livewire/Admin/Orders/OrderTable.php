@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Orders;
 
 use App\Models\Order;
+use Illuminate\Support\Facades\Storage;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
@@ -20,6 +21,10 @@ class OrderTable extends DataTableComponent
         return [
             Column::make("N° Orden", "id")
                 ->sortable(),
+            Column::make("Ticket")
+                ->label(function($row) {
+                    return view('admin.orders.ticket', ['order' => $row]);
+                }),
             Column::make("Cantidad", "content")
                 ->format(function($value) {
                     return count($value);
@@ -55,5 +60,10 @@ class OrderTable extends DataTableComponent
                 })
                 ->sortable(), */
         ];
+    }
+
+    public function printTicket(Order $order){
+        //dd($order->toArray());
+        return Storage::download($order->pdf_path);
     }
 }
