@@ -62,7 +62,7 @@ class OrderTable extends DataTableComponent
         ];
     }
 
-    public function printTicket(Order $order){
+    public function downloadTicket(Order $order){
         //dd($order->toArray());
         return Storage::download($order->pdf_path);
     }

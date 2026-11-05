@@ -1,3 +1,3 @@
-<button class="btn btn-ghost btn-lg" wire:click="printTicket({{$order->id}})">
+<button class="btn btn-ghost btn-lg" wire:click="downloadTicket({{$order->id}})">
     <i class="fa fa-print"></i>
 </button>
